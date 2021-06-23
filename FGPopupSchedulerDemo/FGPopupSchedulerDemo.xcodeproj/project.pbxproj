@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B48AAB322682E12A0081381E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB312682E12A0081381E /* AppDelegate.m */; };
+		B48AAB352682E12A0081381E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB342682E12A0081381E /* SceneDelegate.m */; };
+		B48AAB382682E12A0081381E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB372682E12A0081381E /* ViewController.m */; };
+		B48AAB3B2682E12A0081381E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48AAB392682E12A0081381E /* Main.storyboard */; };
+		B48AAB3D2682E12C0081381E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48AAB3C2682E12C0081381E /* Assets.xcassets */; };
+		B48AAB402682E12C0081381E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48AAB3E2682E12C0081381E /* LaunchScreen.storyboard */; };
+		B48AAB432682E12C0081381E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB422682E12C0081381E /* main.m */; };
+		B48AAB4F2682E19C0081381E /* FGPopupScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB4D2682E19C0081381E /* FGPopupScheduler.m */; };
+		B48AAB5426830C030081381E /* FGPopupQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB5326830C030081381E /* FGPopupQueue.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B48AAB2D2682E12A0081381E /* FGPopupSchedulerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGPopupSchedulerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B48AAB302682E12A0081381E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B48AAB312682E12A0081381E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B48AAB332682E12A0081381E /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		B48AAB342682E12A0081381E /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		B48AAB362682E12A0081381E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B48AAB372682E12A0081381E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B48AAB3A2682E12A0081381E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B48AAB3C2682E12C0081381E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B48AAB3F2682E12C0081381E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B48AAB412682E12C0081381E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B48AAB422682E12C0081381E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B48AAB4B2682E19C0081381E /* FGPopupSchedulerConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGPopupSchedulerConstant.h; sourceTree = "<group>"; };
+		B48AAB4C2682E19C0081381E /* FGPopupScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGPopupScheduler.h; sourceTree = "<group>"; };
+		B48AAB4D2682E19C0081381E /* FGPopupScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGPopupScheduler.m; sourceTree = "<group>"; };
+		B48AAB4E2682E19C0081381E /* FGPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGPopupView.h; sourceTree = "<group>"; };
+		B48AAB51268306E90081381E /* FGPopupSchedulerStrategyQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupSchedulerStrategyQueue.h; sourceTree = "<group>"; };
+		B48AAB5226830C030081381E /* FGPopupQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupQueue.h; sourceTree = "<group>"; };
+		B48AAB5326830C030081381E /* FGPopupQueue.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FGPopupQueue.mm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B48AAB2A2682E12A0081381E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B48AAB242682E12A0081381E = {
+			isa = PBXGroup;
+			children = (
+				B48AAB2F2682E12A0081381E /* FGPopupSchedulerDemo */,
+				B48AAB2E2682E12A0081381E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B48AAB2E2682E12A0081381E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B48AAB2D2682E12A0081381E /* FGPopupSchedulerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B48AAB2F2682E12A0081381E /* FGPopupSchedulerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				B48AAB4A2682E19C0081381E /* FGPopupScheduler */,
+				B48AAB302682E12A0081381E /* AppDelegate.h */,
+				B48AAB312682E12A0081381E /* AppDelegate.m */,
+				B48AAB332682E12A0081381E /* SceneDelegate.h */,
+				B48AAB342682E12A0081381E /* SceneDelegate.m */,
+				B48AAB362682E12A0081381E /* ViewController.h */,
+				B48AAB372682E12A0081381E /* ViewController.m */,
+				B48AAB392682E12A0081381E /* Main.storyboard */,
+				B48AAB3C2682E12C0081381E /* Assets.xcassets */,
+				B48AAB3E2682E12C0081381E /* LaunchScreen.storyboard */,
+				B48AAB412682E12C0081381E /* Info.plist */,
+				B48AAB422682E12C0081381E /* main.m */,
+			);
+			path = FGPopupSchedulerDemo;
+			sourceTree = "<group>";
+		};
+		B48AAB4A2682E19C0081381E /* FGPopupScheduler */ = {
+			isa = PBXGroup;
+			children = (
+				B48AAB5226830C030081381E /* FGPopupQueue.h */,
+				B48AAB5326830C030081381E /* FGPopupQueue.mm */,
+				B48AAB4C2682E19C0081381E /* FGPopupScheduler.h */,
+				B48AAB4D2682E19C0081381E /* FGPopupScheduler.m */,
+				B48AAB4B2682E19C0081381E /* FGPopupSchedulerConstant.h */,
+				B48AAB51268306E90081381E /* FGPopupSchedulerStrategyQueue.h */,
+				B48AAB4E2682E19C0081381E /* FGPopupView.h */,
+			);
+			name = FGPopupScheduler;
+			path = ../../FGPopupScheduler;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B48AAB2C2682E12A0081381E /* FGPopupSchedulerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B48AAB462682E12C0081381E /* Build configuration list for PBXNativeTarget "FGPopupSchedulerDemo" */;
+			buildPhases = (
+				B48AAB292682E12A0081381E /* Sources */,
+				B48AAB2A2682E12A0081381E /* Frameworks */,
+				B48AAB2B2682E12A0081381E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FGPopupSchedulerDemo;
+			productName = FGPopupSchedulerDemo;
+			productReference = B48AAB2D2682E12A0081381E /* FGPopupSchedulerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B48AAB252682E12A0081381E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					B48AAB2C2682E12A0081381E = {
+						CreatedOnToolsVersion = 12.3;
+					};
+				};
+			};
+			buildConfigurationList = B48AAB282682E12A0081381E /* Build configuration list for PBXProject "FGPopupSchedulerDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B48AAB242682E12A0081381E;
+			productRefGroup = B48AAB2E2682E12A0081381E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B48AAB2C2682E12A0081381E /* FGPopupSchedulerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B48AAB2B2682E12A0081381E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B48AAB402682E12C0081381E /* LaunchScreen.storyboard in Resources */,
+				B48AAB3D2682E12C0081381E /* Assets.xcassets in Resources */,
+				B48AAB3B2682E12A0081381E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B48AAB292682E12A0081381E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B48AAB4F2682E19C0081381E /* FGPopupScheduler.m in Sources */,
+				B48AAB382682E12A0081381E /* ViewController.m in Sources */,
+				B48AAB322682E12A0081381E /* AppDelegate.m in Sources */,
+				B48AAB5426830C030081381E /* FGPopupQueue.mm in Sources */,
+				B48AAB432682E12C0081381E /* main.m in Sources */,
+				B48AAB352682E12A0081381E /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B48AAB392682E12A0081381E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B48AAB3A2682E12A0081381E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B48AAB3E2682E12C0081381E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B48AAB3F2682E12C0081381E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B48AAB442682E12C0081381E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B48AAB452682E12C0081381E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B48AAB472682E12C0081381E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T6YKNC9RA4;
+				INFOPLIST_FILE = FGPopupSchedulerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = FongG.com.FGPopupSchedulerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B48AAB482682E12C0081381E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T6YKNC9RA4;
+				INFOPLIST_FILE = FGPopupSchedulerDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = FongG.com.FGPopupSchedulerDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B48AAB282682E12A0081381E /* Build configuration list for PBXProject "FGPopupSchedulerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B48AAB442682E12C0081381E /* Debug */,
+				B48AAB452682E12C0081381E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B48AAB462682E12C0081381E /* Build configuration list for PBXNativeTarget "FGPopupSchedulerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B48AAB472682E12C0081381E /* Debug */,
+				B48AAB482682E12C0081381E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B48AAB252682E12A0081381E /* Project object */;
+}
