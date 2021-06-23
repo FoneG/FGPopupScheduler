@@ -22,6 +22,7 @@
 
 - (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pps{
     if (self = [super init]) {
+//        [FGPopupSchedulers() addObject:self];
         [self setSchedulerStrategy:pps];
     }
     return self;
@@ -53,7 +54,6 @@
         [_list addPopupView:view];
     }
 }
-
 
 - (void)registerFirstPopupViewResponder{
     [_list execute];

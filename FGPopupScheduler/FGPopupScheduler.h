@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)registerFirstPopupViewResponder;
 
+- (BOOL)isEmpty;
+
 @end
 
 NS_ASSUME_NONNULL_END

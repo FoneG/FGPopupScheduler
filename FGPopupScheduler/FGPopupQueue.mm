@@ -65,7 +65,7 @@ PopupElement PopupElementMake(id<FGPopupView> data, FGPopupStrategyPriority Prio
         return;
     }
     WS(wSelf);
-    dispatch_sync_main_safe((^(){
+    dispatch_async_main_safe((^(){
         if ([view respondsToSelector:@selector(showPopupViewWithAnimation:)]) {
             [view showPopupViewWithAnimation:^{
                 SS(sSelf);

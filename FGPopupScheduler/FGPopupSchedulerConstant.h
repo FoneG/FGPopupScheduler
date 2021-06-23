@@ -36,6 +36,15 @@ block();\
 } else {\
 dispatch_sync(dispatch_get_main_queue(), block);\
 }
+
+#define dispatch_async_main_safe(block)\
+if ([NSThread isMainThread]) {\
+block();\
+} else {\
+dispatch_async(dispatch_get_main_queue(), block);\
+}
+
+
 #define WS(wSelf)            __weak typeof(self) wSelf = self
 #define SS(sSelf)            __strong typeof(wSelf) sSelf = wSelf
 
