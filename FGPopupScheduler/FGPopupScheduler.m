@@ -8,6 +8,28 @@
 #import "FGPopupScheduler.h"
 #import "FGPopupSchedulerStrategyQueue.h"
 #import "FGPopupQueue.h"
+#import <CoreFoundation/CFRunLoop.h>
+#import <UIKit/UIKit.h>
+#import <pthread.h>
+#import <libkern/OSAtomic.h>
+
+
+static NSHashTable *FGPopupSchedulers(void) {
+    static NSHashTable *schedulers = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        schedulers = [NSHashTable weakObjectsHashTable];
+    });
+    return schedulers;
+}
+
+static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info){
+    for (FGPopupScheduler *scheduler in FGPopupSchedulers()) {
+        if (![scheduler isEmpty] && [scheduler canRegisterFirstPopupViewResponder]) {
+            [scheduler registerFirstPopupViewResponder];
+        }
+    }
+}
 
 @interface FGPopupScheduler ()
 {
@@ -20,9 +42,18 @@
 
 @implementation FGPopupScheduler
 
++ (void)initialize{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        CFRunLoopObserverRef observer = CFRunLoopObserverCreate(CFAllocatorGetDefault(), kCFRunLoopBeforeWaiting | kCFRunLoopExit, true, 0xFFFFFF, FGRunLoopObserverCallBack, nil);
+        CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopCommonModes);
+        CFRelease(observer);
+    });
+}
+
 - (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pps{
     if (self = [super init]) {
-//        [FGPopupSchedulers() addObject:self];
+        [FGPopupSchedulers() addObject:self];
         [self setSchedulerStrategy:pps];
     }
     return self;
@@ -55,8 +86,27 @@
     }
 }
 
+- (void)remove:(id<FGPopupView>)view{
+    [_list remove:view];
+}
+
+- (void)removeAllPopupViews{
+    [_list clear];
+}
+
+- (BOOL)canRegisterFirstPopupViewResponder{
+    BOOL firstFirstPopupViewResponder = [_list hasFirstFirstPopupViewResponder];
+    return !firstFirstPopupViewResponder;
+}
+
 - (void)registerFirstPopupViewResponder{
-    [_list execute];
+    if ([self canRegisterFirstPopupViewResponder]) {
+        [_list execute];
+    }
+}
+
+- (BOOL)isEmpty{
+    return [_list isEmpty];
 }
 
 @end

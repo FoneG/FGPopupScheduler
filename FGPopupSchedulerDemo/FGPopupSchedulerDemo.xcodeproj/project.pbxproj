@@ -21,6 +21,7 @@
 		B491BCD52683586400281EDC /* ConditionsPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCD42683586400281EDC /* ConditionsPopView.m */; };
 		B491BCDA268358EF00281EDC /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCD9268358EF00281EDC /* UIView+Category.m */; };
 		B491BCDF2683592900281EDC /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCDE2683592900281EDC /* BlueViewController.m */; };
+		B491BD702684502F00281EDC /* Uitl.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BD6F2684502F00281EDC /* Uitl.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		B491BCD9268358EF00281EDC /* UIView+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Category.m"; sourceTree = "<group>"; };
 		B491BCDD2683592900281EDC /* BlueViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlueViewController.h; sourceTree = "<group>"; };
 		B491BCDE2683592900281EDC /* BlueViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
+		B491BD6E2684502F00281EDC /* Uitl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uitl.h; sourceTree = "<group>"; };
+		B491BD6F2684502F00281EDC /* Uitl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uitl.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 			children = (
 				B491BCD8268358EF00281EDC /* UIView+Category.h */,
 				B491BCD9268358EF00281EDC /* UIView+Category.m */,
+				B491BD6E2684502F00281EDC /* Uitl.h */,
+				B491BD6F2684502F00281EDC /* Uitl.m */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				B48AAB4F2682E19C0081381E /* FGPopupScheduler.m in Sources */,
 				B48AAB382682E12A0081381E /* ViewController.m in Sources */,
 				B491BCD52683586400281EDC /* ConditionsPopView.m in Sources */,
+				B491BD702684502F00281EDC /* Uitl.m in Sources */,
 				B48AAB322682E12A0081381E /* AppDelegate.m in Sources */,
 				B491BCD1268356B100281EDC /* AnimationShowPopupView.m in Sources */,
 				B491BCDF2683592900281EDC /* BlueViewController.m in Sources */,

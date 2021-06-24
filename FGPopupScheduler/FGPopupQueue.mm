@@ -8,6 +8,7 @@
 #import "FGPopupQueue.h"
 #import <pthread/pthread.h>
 #include <list>
+#import <objc/runtime.h>
 
 using namespace std;
 
@@ -30,9 +31,17 @@ PopupElement PopupElementMake(id<FGPopupView> data, FGPopupStrategyPriority Prio
     list<PopupElement> _list;
     pthread_mutex_t _lock;
 }
+@property (nonatomic, assign) BOOL hasFirstFirstResponder;
 @end
 
 @implementation FGPopupQueue
+
+- (BOOL)hasFirstFirstPopupViewResponder{
+    pthread_mutex_lock(&_lock);
+    BOOL hasFirstFirstResponder = self.hasFirstFirstResponder;
+    pthread_mutex_unlock(&_lock);
+    return hasFirstFirstResponder;
+}
 
 - (instancetype)init
 {
@@ -57,11 +66,21 @@ PopupElement PopupElementMake(id<FGPopupView> data, FGPopupStrategyPriority Prio
     pthread_mutex_unlock(&_lock);
 }
 
+- (void)remove:(id<FGPopupView>)view{
+    pthread_mutex_lock(&_lock);
+    [self _rm:view];
+    pthread_mutex_unlock(&_lock);
+}
+
+
 - (void)execute{
     pthread_mutex_lock(&_lock);
+    _hasFirstFirstResponder = YES;
+    NSLog(@"execute: _hasFirstFirstResponder %@", _hasFirstFirstResponder?@"yes":@"NO");
     PopupElement elemt = [self hitTestFirstPopupResponder];
     id<FGPopupView> view = elemt.data;
     if (!view) {
+        _hasFirstFirstResponder = NO;
         return;
     }
     WS(wSelf);
@@ -81,6 +100,8 @@ PopupElement PopupElementMake(id<FGPopupView> data, FGPopupStrategyPriority Prio
         }
     }));
 }
+
+
 
 - (BOOL)isEmpty{
     return _list.empty();
@@ -125,5 +146,12 @@ PopupElement PopupElementMake(id<FGPopupView> data, FGPopupStrategyPriority Prio
     return element;
 }
 
+#pragma mark - private
+
+- (void)_rm:(id<FGPopupView>)view{
+    const auto& tmp = view;
+    _list.remove_if([&tmp](PopupElement e){return e.data == tmp;});
+    _hasFirstFirstResponder = NO;
+}
 
 @end

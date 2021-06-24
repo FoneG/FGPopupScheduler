@@ -14,12 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)addPopupView:(id<FGPopupView>)view;
 
+- (void)remove:(id<FGPopupView>)view;
+
 - (void)execute;
 
 - (void)clear;
 
 - (BOOL)isEmpty;
 
+- (BOOL)hasFirstFirstPopupViewResponder;
 @end
 
 NS_ASSUME_NONNULL_END

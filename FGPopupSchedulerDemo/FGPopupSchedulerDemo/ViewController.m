@@ -24,14 +24,16 @@
     
     self.FIFOScheduler = [[FGPopupScheduler alloc] initWithStrategy:FGPopupSchedulerStrategyFIFO];
     
-    BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个"];
-    AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2"];
-    ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3"];
+    BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个" scheduler:self.FIFOScheduler];
+    AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:self.FIFOScheduler];
+    ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3" scheduler:self.FIFOScheduler];
+    AnimationShowPopupView *pop4 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop4" scheduler:self.FIFOScheduler];
 
     
     [self.FIFOScheduler add:pop1];
     [self.FIFOScheduler add:pop2];
     [self.FIFOScheduler add:pop3];
+    [self.FIFOScheduler add:pop4];
 }
 
 

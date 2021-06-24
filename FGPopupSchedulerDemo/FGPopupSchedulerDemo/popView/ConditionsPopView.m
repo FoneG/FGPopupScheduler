@@ -7,6 +7,7 @@
 
 #import "ConditionsPopView.h"
 #import "UIView+Category.h"
+#import "Uitl.h"
 
 @implementation ConditionsPopView
 
@@ -19,7 +20,9 @@
 */
 
 - (BOOL)canRegisterFirstPopupViewResponder{
-    return [self.viewController isKindOfClass:NSClassFromString(@"BlueViewController")];
+    BOOL touch = [[Uitl findCurrentShowingViewController] isKindOfClass:NSClassFromString(@"BlueViewController")];
+    NSLog(@"touch :%@", touch?@"yes":@"NO");
+    return touch;
 }
 
 @end

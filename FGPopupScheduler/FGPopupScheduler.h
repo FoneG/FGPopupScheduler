@@ -15,6 +15,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 根据指定的策略生成一个弹窗控制队列
 /// @param pps 策略类型
+
+/**
+ 根据指定的策略生成一个弹窗控制队列
+ 
+ @param pps  FIFO、LIFO、Priority
+ @return 返回指定策略的调度器，需要外部持有生命周期
+ */
 - (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pps;
 
 /**
@@ -45,14 +52,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)removeAllPopupViews;
 
+/**
+ 返回当前调取队列是否存在弹窗
+ 
+ @return true or false is a question
+ */
+- (BOOL)isEmpty;
+
 
 /**
- 向调度器主动发送一个弹窗的命令, 支持线程安全
+ 返回当前调度器是否拥有已经显示的弹窗
+ */
+- (BOOL)canRegisterFirstPopupViewResponder;
+
+
+/**
+ 向调度器主动发送一个执行显示弹窗的命令, 支持线程安全
  
  */
 - (void)registerFirstPopupViewResponder;
 
-- (BOOL)isEmpty;
+
 
 @end
 

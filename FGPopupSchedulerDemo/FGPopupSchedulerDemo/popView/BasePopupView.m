@@ -17,7 +17,7 @@
 }
 */
 
-- (instancetype)initWithDescrption:(NSString *)des
+- (instancetype)initWithDescrption:(NSString *)des scheduler:(nonnull FGPopupScheduler *)scheduler
 {
     self = [super initWithFrame:CGRectMake(0, 0, 200, 300)];
     if (self) {
@@ -37,6 +37,8 @@
         label.backgroundColor = [UIColor clearColor];
         label.textAlignment = NSTextAlignmentCenter;
         [self addSubview:label];
+        
+        _scheduler = scheduler;
     }
     return self;
 }
@@ -50,6 +52,7 @@
 - (void)dismissPopupView{
     NSLog(@"%s", __func__);
     [self removeFromSuperview];
+    [_scheduler remove:self];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
