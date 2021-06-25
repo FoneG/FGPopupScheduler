@@ -5,7 +5,8 @@
 [![License](https://img.shields.io/cocoapods/l/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 [![Platform](https://img.shields.io/cocoapods/p/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 
-iOS弹窗调用器，控制弹窗按照指定的策略进行显示
+iOS弹窗调用器，控制弹窗按照指定的策略进行显示    
+
 [详细介绍](https://note.youdao.com/s/INqEsalh)
 
 ## 特性
@@ -32,7 +33,7 @@ iOS弹窗调用器，控制弹窗按照指定的策略进行显示
 
 ## 用法
 
-可下载 DEMO 参考一个相册处理的案例。
+可下载 DEMO 参考一个弹窗优先级处理的案例。
 
 ### 基本使用
 
@@ -60,3 +61,6 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
 ```
 
 可以根据需求选择合适的策略，另外实际上还可以结合 FGPopupSchedulerStrategyPriority | FGPopupSchedulerStrategyFIFO 一起使用，来处理当选择优先级策略时，如何决定同一优先级弹窗的排序。
+
+
+![image](https://note.youdao.com/yws/public/resource/5d0f46ddde197eb1269de27f6675abd2/xmlnote/WEBRESOURCEfc2aed555ac786e6b520aec9e1de6b09/14666)
