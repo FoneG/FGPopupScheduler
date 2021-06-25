@@ -32,7 +32,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 @interface FGPopupScheduler ()
 {
     id<FGPopupSchedulerStrategyQueue> _list;
-    FGPopupSchedulerStrategy _pps;
+    FGPopupSchedulerStrategy _pss;
 }
 @property (nonatomic, assign) BOOL hasPopupView;
 
@@ -49,29 +49,26 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
     });
 }
 
-- (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pps{
+- (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pss{
     if (self = [super init]) {
         [FGPopupSchedulers() addObject:self];
-        [self setSchedulerStrategy:pps];
+        [self setSchedulerStrategy:pss];
     }
     return self;
 }
 
-- (void)setSchedulerStrategy:(FGPopupSchedulerStrategy)pps{
-    _pps = pps;
-    switch (pps) {
-        case FGPopupSchedulerStrategyFIFO:
-            _list = [[FGPopupQueue alloc] init];
-            break;
-        case FGPopupSchedulerStrategyLIFO:
-            _list = [[FGPopupStack alloc] init];
-            break;
-        case FGPopupSchedulerStrategyPriority:{
-            FGPopupPriorityList *PriorityList = [[FGPopupPriorityList alloc] init];
-            PriorityList.PPAS = pps & FGPopupSchedulerStrategyLIFO ? FGPopupPriorityAddStrategyLIFO : FGPopupPriorityAddStrategyFIFO;
-            _list = PriorityList;
-        }
-            break;
+- (void)setSchedulerStrategy:(FGPopupSchedulerStrategy)pss{
+    _pss = pss;
+    if (pss & FGPopupSchedulerStrategyPriority) {
+        FGPopupPriorityList *PriorityList = [[FGPopupPriorityList alloc] init];
+        PriorityList.PPAS = pss & FGPopupSchedulerStrategyLIFO ? FGPopupPriorityAddStrategyLIFO : FGPopupPriorityAddStrategyFIFO;
+        _list = PriorityList;
+    }
+    else if (pss == FGPopupSchedulerStrategyFIFO) {
+        _list = [[FGPopupQueue alloc] init];
+    }
+    else if(pss == FGPopupSchedulerStrategyLIFO){
+        _list = [[FGPopupStack alloc] init];
     }
 }
 

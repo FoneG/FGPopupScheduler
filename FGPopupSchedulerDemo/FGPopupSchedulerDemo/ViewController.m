@@ -26,7 +26,7 @@
     // Do any additional setup after loading the view.
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"切换策略" style:UIBarButtonItemStyleDone target:self action:@selector(exchangeScheduler)];
     
-    [self setState:FGPopupSchedulerStrategyPriority];
+    [self setState:FGPopupSchedulerStrategyPriority|FGPopupSchedulerStrategyLIFO];
 }
 
 - (void)setState:(FGPopupSchedulerStrategy)pss{
@@ -42,20 +42,16 @@
     [self.Scheduler add:pop2];
     [self.Scheduler add:pop3];
     [self.Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
-    [self.Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityVeryHigh];
+    [self.Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
     
-    switch (pss) {
-        case  FGPopupSchedulerStrategyFIFO:
-            self.title = @"先进先出";
-            break;
-        case FGPopupSchedulerStrategyLIFO:
-            self.title = @"后进先出";
-            break;
-        case FGPopupSchedulerStrategyPriority:
-            self.title = pss & FGPopupSchedulerStrategyFIFO ? @"优先级 & FIFO":@"优先级 & LIFO";
-            break;
-        default:
-            break;
+    if (pss & FGPopupSchedulerStrategyPriority) {
+        self.title = pss & FGPopupSchedulerStrategyLIFO ? @"优先级 & LIFO": @"优先级 & FIFO";
+    }
+    else if (pss == FGPopupSchedulerStrategyFIFO) {
+        self.title = @"先进先出";
+    }
+    else if(pss == FGPopupSchedulerStrategyLIFO){
+        self.title = @"后进先出";
     }
 }
 

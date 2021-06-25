@@ -144,10 +144,10 @@ using namespace std;
 
 - (void)_insert:(PopupElement *)e index:(int)index{
     list<PopupElement*>::iterator it = _list.begin();
-    do {
+    while (index>0) {
         it++;
         index--;
-    } while (index>0);
+    }
     _list.insert(it, e);
 }
 
@@ -160,14 +160,14 @@ using namespace std;
     list<PopupElement*>::iterator it = _list.begin();
     NSUInteger index = 0;
     BOOL stop = NO;
-    do {
+    while (it!=_list.end() && stop==NO) {
         if (block) {
             PopupElement *elemnt = *it;
             block(elemnt, index, &stop);
         }
         it++;
         index++;
-    } while (it!=_list.end() && stop==NO);
+    }
 }
 
 - (void)_rm_data:(id)data{
