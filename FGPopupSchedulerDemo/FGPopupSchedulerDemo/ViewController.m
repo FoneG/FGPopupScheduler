@@ -24,26 +24,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"切换策略" style:UIBarButtonItemStyleDone target:self action:@selector(exchangeScheduler)];
+    
+    BOOL suspend = YES;
+    
+    UIBarButtonItem *suspended = [[UIBarButtonItem alloc] initWithTitle:suspend?@"恢复":@"挂起" style:UIBarButtonItemStyleDone target:self action:@selector(suspendedState:)];
+    UIBarButtonItem *pss = [[UIBarButtonItem alloc] initWithTitle:@"切换策略" style:UIBarButtonItemStyleDone target:self action:@selector(exchangeScheduler)];
+    self.navigationItem.rightBarButtonItems = @[suspended, pss];
+
     
     [self setState:FGPopupSchedulerStrategyPriority|FGPopupSchedulerStrategyLIFO];
+    self.Scheduler.suspended = suspend;
+    [self fillPopupViews];
 }
 
 - (void)setState:(FGPopupSchedulerStrategy)pss{
     FGPopupScheduler *Scheduler = FGPopupSchedulerGetForPSS(pss);
     self.Scheduler = Scheduler;
-    
-    BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop1" scheduler:Scheduler];
-    AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
-    ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3" scheduler:Scheduler];
-    PriorityPopupView *pop4 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
-    PriorityPopupView *pop5 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
-    
-    [Scheduler add:pop1];
-    [Scheduler add:pop2];
-    [Scheduler add:pop3];
-    [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
-    [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
     
     if (pss & FGPopupSchedulerStrategyPriority) {
         self.title = pss & FGPopupSchedulerStrategyLIFO ? @"优先级 & LIFO": @"优先级 & FIFO";
@@ -56,24 +52,43 @@
     }
 }
 
+- (void)fillPopupViews{
+    FGPopupScheduler *Scheduler = self.Scheduler;
+    BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop1" scheduler:Scheduler];
+    AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
+    ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3" scheduler:Scheduler];
+    PriorityPopupView *pop4 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
+    PriorityPopupView *pop5 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
+    
+    [Scheduler add:pop1];
+    [Scheduler add:pop2];
+    [Scheduler add:pop3];
+    [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+    [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+}
+
 - (void)exchangeScheduler{
     UIAlertController *alter = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 
     UIAlertAction *FIFO = [UIAlertAction actionWithTitle:@"先进先出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.Scheduler removeAllPopupViews];
         [self setState:FGPopupSchedulerStrategyFIFO];
+        [self fillPopupViews];
     }];
     UIAlertAction *LIFO = [UIAlertAction actionWithTitle:@"后进先出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.Scheduler removeAllPopupViews];
         [self setState:FGPopupSchedulerStrategyLIFO];
+        [self fillPopupViews];
     }];
     UIAlertAction *PriorityFIFO = [UIAlertAction actionWithTitle:@"优先级 & FIFO" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.Scheduler removeAllPopupViews];
         [self setState:FGPopupSchedulerStrategyPriority];
+        [self fillPopupViews];
     }];
     UIAlertAction *PriorityLIFO = [UIAlertAction actionWithTitle:@"优先级 & LIFO" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self.Scheduler removeAllPopupViews];
         [self setState:FGPopupSchedulerStrategyPriority | FGPopupSchedulerStrategyLIFO];
+        [self fillPopupViews];
     }];
     
     [alter addAction:FIFO];
@@ -82,6 +97,11 @@
     [alter addAction:PriorityLIFO];
 
     [self presentViewController:alter animated:YES completion:nil];
+}
+
+- (void)suspendedState:(UIBarButtonItem *)item{
+    item.title = self.Scheduler.isSuspended?@"恢复":@"挂起";
+    self.Scheduler.suspended = !self.Scheduler.isSuspended;
 }
 
 - (IBAction)push:(id)sender {

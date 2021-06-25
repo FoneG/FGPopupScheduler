@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pss;
 
 /**
- 向队列插入一个弹窗，FGPopupScheduler会根据设置的策略状态来控制在队列中插入的位置, 弹窗默认使用FGPopupViewStrategyKeep策略, 支持线程安全
+ 向队列插入一个弹窗，FGPopupScheduler会根据设置的策略状态来控制在队列中插入的位置, 弹窗默认使用FGPopupViewStrategyKeep策略。如果条件允许（通过-hitTest），将会通过-showPopupViewWithAnimation or -showPopupView 显示。 支持线程安全
  
  @param view 弹窗实例
  */
@@ -54,25 +54,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeAllPopupViews;
 
 /**
- 返回当前调取队列是否存在弹窗
- 
- @return true or false is a question
- */
-- (BOOL)isEmpty;
-
-
-/**
- 返回当前调度器是否拥有已经显示的弹窗
- */
-- (BOOL)canRegisterFirstPopupViewResponder;
-
-
-/**
  向调度器主动发送一个执行显示弹窗的命令, 支持线程安全
  
  */
 - (void)registerFirstPopupViewResponder;
 
+/**
+ 返回当前调度器是否拥有已经显示的弹窗, 如果canRegisterFirstPopupViewResponder为true，-registerFirstPopupViewResponder将执行无效
+ */
+@property (nonatomic, assign, readonly) BOOL canRegisterFirstPopupViewResponder;
+
+/**
+ 返回当前调取队列是否存在弹窗
+ 
+ */
+@property (nonatomic, assign, getter=isEmpty, readonly) BOOL empty;
+
+/**
+ 可以将调度器进行挂起，可以中止队列触发- execute。挂起状态不会影响已经execute的弹窗
+ */
+@property (nonatomic, assign, getter=isSuspended) BOOL suspended;
 
 @end
 

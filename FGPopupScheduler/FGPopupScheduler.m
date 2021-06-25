@@ -99,8 +99,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 - (void)registerFirstPopupViewResponder{
-    NSLog(@"%s", __func__);
-    if ([self canRegisterFirstPopupViewResponder]) {
+    if (!self.suspended && self.canRegisterFirstPopupViewResponder) {
         [_list execute];
     }
 }
@@ -109,6 +108,10 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
     return [_list isEmpty];
 }
 
+- (void)setSuspended:(BOOL)suspended{
+    _suspended = suspended;
+    [self registerFirstPopupViewResponder];
+}
 @end
 
 FGPopupScheduler * FGPopupSchedulerGetForPSS(FGPopupSchedulerStrategy pss){
