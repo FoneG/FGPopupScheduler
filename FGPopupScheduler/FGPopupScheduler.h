@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  根据指定的策略生成一个弹窗控制队列
  
- @param pps  FIFO、LIFO、Priority
+ @param pss  FIFO、LIFO、Priority
  @return 返回指定策略的调度器，需要外部持有生命周期
  */
 - (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pss;
@@ -42,14 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
-移除弹窗, 支持线程安全
+把弹窗种队列种移除, 不会触发<FGPopupView>的-dismissPopupViewW or -dismissPopupViewWithAnimation: 方法，支持线程安全
  
 @param view 弹窗实例
  */
 - (void)remove:(id<FGPopupView>)view;
 
 /**
- 移除队列中所有的弹窗队列，但不会触发, 支持线程安全
+ 移除队列中所有的弹窗队列，显示的弹窗将会触发<FGPopupView>的-dismissPopupViewW or -dismissPopupViewWithAnimation: 方法,  并优先执行-dismissPopupViewWithAnimation:方法。 支持线程安全
  */
 - (void)removeAllPopupViews;
 

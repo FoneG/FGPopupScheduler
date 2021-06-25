@@ -25,7 +25,6 @@
     }];
     [self _insert:[PopupElement elementWith:view Priority:Priority] index:index];
     [self unLock];
-    NSLog(@"Priority: %d index:%d", Priority, index);
 }
 
 

@@ -102,8 +102,24 @@ using namespace std;
 
 - (void)clear{
     [self lock];
-    _list.clear();
-    [self unLock];
+    id<FGPopupView> data = self.FirstFirstResponderElement.data;
+    if (data) {
+        WS(wSelf);
+        dispatch_sync_main_safe(^(){
+            SS(sSelf);
+            if ([data respondsToSelector:@selector(dismissPopupView)]) {
+                [data dismissPopupView];
+                sSelf->_list.clear();
+                [sSelf unLock];
+            }
+            else if ([data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
+                [data dismissPopupViewWithAnimation:^{
+                    sSelf->_list.clear();
+                    [sSelf unLock];
+                }];
+            }
+        });
+    }
 }
 
 /*
