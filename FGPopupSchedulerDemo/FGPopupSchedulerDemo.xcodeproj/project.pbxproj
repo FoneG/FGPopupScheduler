@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B46F2F172685969200601E29 /* FGPopupStack.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F2F162685969200601E29 /* FGPopupStack.m */; };
+		B46F2F1B26859A6500601E29 /* FGPopupPriorityList.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F2F1A26859A6500601E29 /* FGPopupPriorityList.m */; };
+		B46F2F212685A89B00601E29 /* PriorityPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F2F202685A89B00601E29 /* PriorityPopupView.m */; };
 		B48AAB322682E12A0081381E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB312682E12A0081381E /* AppDelegate.m */; };
 		B48AAB352682E12A0081381E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB342682E12A0081381E /* SceneDelegate.m */; };
 		B48AAB382682E12A0081381E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB372682E12A0081381E /* ViewController.m */; };
@@ -29,6 +31,10 @@
 /* Begin PBXFileReference section */
 		B46F2F152685969200601E29 /* FGPopupStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupStack.h; sourceTree = "<group>"; };
 		B46F2F162685969200601E29 /* FGPopupStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGPopupStack.m; sourceTree = "<group>"; };
+		B46F2F1926859A6500601E29 /* FGPopupPriorityList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupPriorityList.h; sourceTree = "<group>"; };
+		B46F2F1A26859A6500601E29 /* FGPopupPriorityList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGPopupPriorityList.m; sourceTree = "<group>"; };
+		B46F2F1F2685A89B00601E29 /* PriorityPopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriorityPopupView.h; sourceTree = "<group>"; };
+		B46F2F202685A89B00601E29 /* PriorityPopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriorityPopupView.m; sourceTree = "<group>"; };
 		B48AAB2D2682E12A0081381E /* FGPopupSchedulerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGPopupSchedulerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48AAB302682E12A0081381E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B48AAB312682E12A0081381E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -121,14 +127,16 @@
 				B491BD722684586B00281EDC /* FGPopupList.h */,
 				B491BD732684586C00281EDC /* FGPopupList.mm */,
 				B491BE0726847CE900281EDC /* FGPopupList+Internal.h */,
+				B46F2F1926859A6500601E29 /* FGPopupPriorityList.h */,
+				B46F2F1A26859A6500601E29 /* FGPopupPriorityList.m */,
 				B48AAB5226830C030081381E /* FGPopupQueue.h */,
 				B48AAB5326830C030081381E /* FGPopupQueue.mm */,
-				B46F2F152685969200601E29 /* FGPopupStack.h */,
-				B46F2F162685969200601E29 /* FGPopupStack.m */,
 				B48AAB4C2682E19C0081381E /* FGPopupScheduler.h */,
 				B48AAB4D2682E19C0081381E /* FGPopupScheduler.m */,
 				B48AAB4B2682E19C0081381E /* FGPopupSchedulerConstant.h */,
 				B48AAB51268306E90081381E /* FGPopupSchedulerStrategyQueue.h */,
+				B46F2F152685969200601E29 /* FGPopupStack.h */,
+				B46F2F162685969200601E29 /* FGPopupStack.m */,
 				B48AAB4E2682E19C0081381E /* FGPopupView.h */,
 			);
 			name = FGPopupScheduler;
@@ -144,6 +152,8 @@
 				B491BCD0268356B100281EDC /* AnimationShowPopupView.m */,
 				B491BCD32683586400281EDC /* ConditionsPopView.h */,
 				B491BCD42683586400281EDC /* ConditionsPopView.m */,
+				B46F2F1F2685A89B00601E29 /* PriorityPopupView.h */,
+				B46F2F202685A89B00601E29 /* PriorityPopupView.m */,
 			);
 			path = popView;
 			sourceTree = "<group>";
@@ -235,6 +245,7 @@
 				B48AAB322682E12A0081381E /* AppDelegate.m in Sources */,
 				B491BCD1268356B100281EDC /* AnimationShowPopupView.m in Sources */,
 				B46F2F172685969200601E29 /* FGPopupStack.m in Sources */,
+				B46F2F1B26859A6500601E29 /* FGPopupPriorityList.m in Sources */,
 				B491BCDF2683592900281EDC /* BlueViewController.m in Sources */,
 				B48AAB5426830C030081381E /* FGPopupQueue.mm in Sources */,
 				B491BCCB2683557C00281EDC /* BasePopupView.m in Sources */,
@@ -242,6 +253,7 @@
 				B491BD742684586C00281EDC /* FGPopupList.mm in Sources */,
 				B491BCDA268358EF00281EDC /* UIView+Category.m in Sources */,
 				B48AAB352682E12A0081381E /* SceneDelegate.m in Sources */,
+				B46F2F212685A89B00601E29 /* PriorityPopupView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

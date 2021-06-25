@@ -6,12 +6,11 @@
 //
 
 #import "FGPopupScheduler.h"
+#import <CoreFoundation/CFRunLoop.h>
 #import "FGPopupSchedulerStrategyQueue.h"
 #import "FGPopupQueue.h"
 #import "FGPopupStack.h"
-#import <CoreFoundation/CFRunLoop.h>
-//#import <libkern/OSAtomic.h>
-
+#import "FGPopupPriorityList.h"
 
 static NSHashTable *FGPopupSchedulers(void) {
     static NSHashTable *schedulers = nil;
@@ -67,22 +66,25 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
         case FGPopupSchedulerStrategyLIFO:
             _list = [[FGPopupStack alloc] init];
             break;
-            
-        case FGPopupSchedulerStrategyPriority:
+        case FGPopupSchedulerStrategyPriority:{
+            FGPopupPriorityList *PriorityList = [[FGPopupPriorityList alloc] init];
+            PriorityList.PPAS = pps & FGPopupSchedulerStrategyLIFO ? FGPopupPriorityAddStrategyLIFO : FGPopupPriorityAddStrategyFIFO;
+            _list = PriorityList;
+        }
             break;
     }
 }
 
 - (void)add:(id<FGPopupView>)view{
-    [self add:view strategy:FGPopupViewStrategyKeep];
+    [self add:view strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityNormal];
 }
 
-- (void)add:(id<FGPopupView>)view strategy:(FGPopupViewStrategy)pvs{
+- (void)add:(id<FGPopupView>)view strategy:(FGPopupViewStrategy)pvs Priority:(FGPopupStrategyPriority)Priority{
     /// 当前状态是否存在展示的弹窗
     if (_hasPopupView && pvs == FGPopupViewStrategyAbandon) {
         /// view被抛弃
     }else{
-        [_list addPopupView:view];
+        [_list addPopupView:view Priority:Priority];
     }
 }
 

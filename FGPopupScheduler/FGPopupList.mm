@@ -53,8 +53,8 @@ using namespace std;
 
 #pragma mark - FGPopupSchedulerStrategyQueue
 
-- (void)addPopupView:(id<FGPopupView>)view{
-    ///
+- (void)addPopupView:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)Priority{
+    @throw([NSException exceptionWithName:@"FGPopupList" reason:@"You must overWrite this method!" userInfo:nil]);
 }
 
 - (void)removePopupView:(id<FGPopupView>)view{
@@ -154,6 +154,20 @@ using namespace std;
 - (void)_rm:(PopupElement *)elemt{
     [self _rm_data:elemt.data];
     _hasFirstFirstResponder = NO;
+}
+
+- (void)_enumerateObjectsUsingBlock:(void (NS_NOESCAPE ^)(PopupElement *obj, NSUInteger idx, BOOL *stop))block{
+    list<PopupElement*>::iterator it = _list.begin();
+    NSUInteger index = 0;
+    BOOL stop = NO;
+    do {
+        if (block) {
+            PopupElement *elemnt = *it;
+            block(elemnt, index, &stop);
+        }
+        it++;
+        index++;
+    } while (it!=_list.end() && stop==NO);
 }
 
 - (void)_rm_data:(id)data{

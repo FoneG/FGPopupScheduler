@@ -16,8 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
  向当前队列中添加弹窗对象，根据不同的FGPopupSchedulerStrategy，每个subList自己都需要重构的-addPopupView:方法
  
  @param view 弹窗对象
+ @param Priority 优先级
  */
-- (void)addPopupView:(id<FGPopupView>)view;
+- (void)addPopupView:(id<FGPopupView>)view  Priority:(FGPopupStrategyPriority)Priority;
 
 /**
  从当前队列删除指定的弹窗对象，根据不同的FGPopupSchedulerStrategy，每个subList自己都需要重构的-removePopupView:方法

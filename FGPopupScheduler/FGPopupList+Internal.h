@@ -18,8 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)_push_front:(PopupElement *)e;
 - (void)_insert:(PopupElement *)e index:(int)index;
 - (void)_rm:(PopupElement *)e;
+- (void)_enumerateObjectsUsingBlock:(void (NS_NOESCAPE ^)(PopupElement *obj, NSUInteger idx, BOOL *stop))block;
 
 @end
+
 
 
 NS_ASSUME_NONNULL_END

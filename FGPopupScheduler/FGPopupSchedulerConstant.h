@@ -10,15 +10,15 @@
 
 //
 typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
-    FGPopupSchedulerStrategyFIFO,       //先进先出
-    FGPopupSchedulerStrategyLIFO,       //后进先出
-    FGPopupSchedulerStrategyPriority,   //优先级调度
+    FGPopupSchedulerStrategyFIFO = 1 << 0,           //先进先出
+    FGPopupSchedulerStrategyLIFO = 1 << 1,           //后进先出
+    FGPopupSchedulerStrategyPriority = 1 << 2        //优先级调度
 };
 
 //当前显示弹窗已经存在时，会根据FGPopupViewStrategy策略判断是否如何处理弹窗
 typedef NS_ENUM(NSUInteger, FGPopupViewStrategy) {
-    FGPopupViewStrategyAbandon,       //抛弃
     FGPopupViewStrategyKeep,          //保留
+    FGPopupViewStrategyAbandon,       //抛弃
 };
 
 typedef NSUInteger FGPopupStrategyPriority;

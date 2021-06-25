@@ -10,10 +10,9 @@
 
 @implementation FGPopupStack
 
-- (void)addPopupView:(id<FGPopupView>)view{
-    [super addPopupView:view];
+- (void)addPopupView:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)Priority{
     [self lock];
-    [self _push_front:[PopupElement elementWith:view Priority:FGPopupStrategyPriorityNormal]];
+    [self _push_front:[PopupElement elementWith:view Priority:Priority]];
     [self unLock];
 }
 
