@@ -18,7 +18,7 @@
 		B48AAB402682E12C0081381E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48AAB3E2682E12C0081381E /* LaunchScreen.storyboard */; };
 		B48AAB432682E12C0081381E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB422682E12C0081381E /* main.m */; };
 		B48AAB4F2682E19C0081381E /* FGPopupScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB4D2682E19C0081381E /* FGPopupScheduler.m */; };
-		B48AAB5426830C030081381E /* FGPopupQueue.mm in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB5326830C030081381E /* FGPopupQueue.mm */; };
+		B48AAB5426830C030081381E /* FGPopupQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B48AAB5326830C030081381E /* FGPopupQueue.m */; };
 		B491BCCB2683557C00281EDC /* BasePopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCCA2683557C00281EDC /* BasePopupView.m */; };
 		B491BCD1268356B100281EDC /* AnimationShowPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCD0268356B100281EDC /* AnimationShowPopupView.m */; };
 		B491BCD52683586400281EDC /* ConditionsPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCD42683586400281EDC /* ConditionsPopView.m */; };
@@ -53,7 +53,7 @@
 		B48AAB4E2682E19C0081381E /* FGPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGPopupView.h; sourceTree = "<group>"; };
 		B48AAB51268306E90081381E /* FGPopupSchedulerStrategyQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupSchedulerStrategyQueue.h; sourceTree = "<group>"; };
 		B48AAB5226830C030081381E /* FGPopupQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupQueue.h; sourceTree = "<group>"; };
-		B48AAB5326830C030081381E /* FGPopupQueue.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FGPopupQueue.mm; sourceTree = "<group>"; };
+		B48AAB5326830C030081381E /* FGPopupQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGPopupQueue.m; sourceTree = "<group>"; };
 		B491BCC92683557C00281EDC /* BasePopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasePopupView.h; sourceTree = "<group>"; };
 		B491BCCA2683557C00281EDC /* BasePopupView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasePopupView.m; sourceTree = "<group>"; };
 		B491BCCF268356B100281EDC /* AnimationShowPopupView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationShowPopupView.h; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 				B46F2F1926859A6500601E29 /* FGPopupPriorityList.h */,
 				B46F2F1A26859A6500601E29 /* FGPopupPriorityList.m */,
 				B48AAB5226830C030081381E /* FGPopupQueue.h */,
-				B48AAB5326830C030081381E /* FGPopupQueue.mm */,
+				B48AAB5326830C030081381E /* FGPopupQueue.m */,
 				B48AAB4C2682E19C0081381E /* FGPopupScheduler.h */,
 				B48AAB4D2682E19C0081381E /* FGPopupScheduler.m */,
 				B48AAB4B2682E19C0081381E /* FGPopupSchedulerConstant.h */,
@@ -247,7 +247,7 @@
 				B46F2F172685969200601E29 /* FGPopupStack.m in Sources */,
 				B46F2F1B26859A6500601E29 /* FGPopupPriorityList.m in Sources */,
 				B491BCDF2683592900281EDC /* BlueViewController.m in Sources */,
-				B48AAB5426830C030081381E /* FGPopupQueue.mm in Sources */,
+				B48AAB5426830C030081381E /* FGPopupQueue.m in Sources */,
 				B491BCCB2683557C00281EDC /* BasePopupView.m in Sources */,
 				B48AAB432682E12C0081381E /* main.m in Sources */,
 				B491BD742684586C00281EDC /* FGPopupList.mm in Sources */,

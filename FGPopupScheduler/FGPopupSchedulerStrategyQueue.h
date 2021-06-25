@@ -34,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
  清除当前队列弹窗，
  */
 - (void)clear;
-//并且会触发-dismissPopupView or -dismissPopupViewWithAnimation: 方法
 
 /**
  返回当前队列是否存在弹窗
