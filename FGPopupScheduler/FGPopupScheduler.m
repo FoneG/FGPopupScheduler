@@ -8,10 +8,9 @@
 #import "FGPopupScheduler.h"
 #import "FGPopupSchedulerStrategyQueue.h"
 #import "FGPopupQueue.h"
+#import "FGPopupStack.h"
 #import <CoreFoundation/CFRunLoop.h>
-#import <UIKit/UIKit.h>
-#import <pthread.h>
-#import <libkern/OSAtomic.h>
+//#import <libkern/OSAtomic.h>
 
 
 static NSHashTable *FGPopupSchedulers(void) {
@@ -66,6 +65,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
             _list = [[FGPopupQueue alloc] init];
             break;
         case FGPopupSchedulerStrategyLIFO:
+            _list = [[FGPopupStack alloc] init];
             break;
             
         case FGPopupSchedulerStrategyPriority:
