@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FGPopupView <NSObject>
 
+@optional
 /*
  FGPopupSchedulerStrategyQueue会根据 -showPopupView: 来监听显示逻辑，如果含有动画请实现-showPopupViewWithAnimation:方法
  */
@@ -21,8 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
  FGPopupSchedulerStrategyQueue会根据 -dismissPopupView: 来监听隐藏逻辑，如果含有动画请实现-showPopupViewWithAnimation:方法
  */
 - (void)dismissPopupView;
-
-@optional
 
 /*
  FGPopupSchedulerStrategyQueue会根据 -showPopupViewWithAnimation: 来监听显示逻辑

@@ -22,6 +22,7 @@
 		B491BCDA268358EF00281EDC /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCD9268358EF00281EDC /* UIView+Category.m */; };
 		B491BCDF2683592900281EDC /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCDE2683592900281EDC /* BlueViewController.m */; };
 		B491BD702684502F00281EDC /* Uitl.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BD6F2684502F00281EDC /* Uitl.m */; };
+		B491BD742684586C00281EDC /* FGPopupList.mm in Sources */ = {isa = PBXBuildFile; fileRef = B491BD732684586C00281EDC /* FGPopupList.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,9 @@
 		B491BCDE2683592900281EDC /* BlueViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlueViewController.m; sourceTree = "<group>"; };
 		B491BD6E2684502F00281EDC /* Uitl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Uitl.h; sourceTree = "<group>"; };
 		B491BD6F2684502F00281EDC /* Uitl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Uitl.m; sourceTree = "<group>"; };
+		B491BD722684586B00281EDC /* FGPopupList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupList.h; sourceTree = "<group>"; };
+		B491BD732684586C00281EDC /* FGPopupList.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FGPopupList.mm; sourceTree = "<group>"; };
+		B491BE0726847CE900281EDC /* FGPopupList+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FGPopupList+Internal.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +115,9 @@
 		B48AAB4A2682E19C0081381E /* FGPopupScheduler */ = {
 			isa = PBXGroup;
 			children = (
+				B491BD722684586B00281EDC /* FGPopupList.h */,
+				B491BD732684586C00281EDC /* FGPopupList.mm */,
+				B491BE0726847CE900281EDC /* FGPopupList+Internal.h */,
 				B48AAB5226830C030081381E /* FGPopupQueue.h */,
 				B48AAB5326830C030081381E /* FGPopupQueue.mm */,
 				B48AAB4C2682E19C0081381E /* FGPopupScheduler.h */,
@@ -226,6 +233,7 @@
 				B48AAB5426830C030081381E /* FGPopupQueue.mm in Sources */,
 				B491BCCB2683557C00281EDC /* BasePopupView.m in Sources */,
 				B48AAB432682E12C0081381E /* main.m in Sources */,
+				B491BD742684586C00281EDC /* FGPopupList.mm in Sources */,
 				B491BCDA268358EF00281EDC /* UIView+Category.m in Sources */,
 				B48AAB352682E12A0081381E /* SceneDelegate.m in Sources */,
 			);

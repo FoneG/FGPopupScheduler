@@ -5,12 +5,11 @@
 //  Created by FoneG on 2021/6/23.
 //
 
-#import <Foundation/Foundation.h>
-#import "FGPopupSchedulerStrategyQueue.h"
+#import "FGPopupList.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FGPopupQueue : NSObject <FGPopupSchedulerStrategyQueue>
+@interface FGPopupQueue : FGPopupList
 
 @end
 

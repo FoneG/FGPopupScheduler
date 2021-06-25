@@ -87,7 +87,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 - (void)remove:(id<FGPopupView>)view{
-    [_list remove:view];
+    [_list removePopupView:view];
 }
 
 - (void)removeAllPopupViews{
@@ -100,6 +100,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 - (void)registerFirstPopupViewResponder{
+    NSLog(@"%s", __func__);
     if ([self canRegisterFirstPopupViewResponder]) {
         [_list execute];
     }

@@ -12,16 +12,37 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FGPopupSchedulerStrategyQueue <NSObject>
 
+/**
+ 向当前队列中添加弹窗对象，根据不同的FGPopupSchedulerStrategy，每个subList自己都需要重构的-addPopupView:方法
+ 
+ @param view 弹窗对象
+ */
 - (void)addPopupView:(id<FGPopupView>)view;
 
-- (void)remove:(id<FGPopupView>)view;
+/**
+ 从当前队列删除指定的弹窗对象，根据不同的FGPopupSchedulerStrategy，每个subList自己都需要重构的-removePopupView:方法
+ */
+- (void)removePopupView:(id<FGPopupView>)view;
 
+/**
+ 从当前队列中进行-hitTest，返回对象作为当前的FirstFirstResponder，并执行显示操作
+ */
 - (void)execute;
 
+/**
+ 清除当前队列弹窗，
+ */
 - (void)clear;
+//并且会触发-dismissPopupView or -dismissPopupViewWithAnimation: 方法
 
+/**
+ 返回当前队列是否存在弹窗
+ */
 - (BOOL)isEmpty;
 
+/**
+ 返回当前是否已经有显示的弹窗
+ */
 - (BOOL)hasFirstFirstPopupViewResponder;
 @end
 
