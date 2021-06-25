@@ -64,3 +64,8 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
 
 
 ![image](https://note.youdao.com/yws/public/resource/5d0f46ddde197eb1269de27f6675abd2/xmlnote/WEBRESOURCEfc2aed555ac786e6b520aec9e1de6b09/14666)
+
+
+## 问题交流
+如果大家发现bug或者需求，请在GitHub提issue    
+好用的话，请路过的朋友们给点个star 🙏🙏🙏🙏🙏
