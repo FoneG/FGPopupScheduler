@@ -11,9 +11,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => 'https://github.com/FoneG/FGPopupScheduler.git', :tag => s.version.to_s }
   
   s.requires_arc = true
-  s.source_files = 'FGPopupScheduler/*.{h,m}'
-  s.public_header_files = 'FGPopupScheduler/*.{h}'
-  
-  s.frameworks = 'UIKit'
+  s.source_files = 'FGPopupScheduler/*.{h,m,mm}'  
+  s.libraries = 'c++.1'
 
 end
