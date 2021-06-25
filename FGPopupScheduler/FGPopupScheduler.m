@@ -34,7 +34,6 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
     id<FGPopupSchedulerStrategyQueue> _list;
     FGPopupSchedulerStrategy _pss;
 }
-@property (nonatomic, assign) BOOL hasPopupView;
 
 @end
 
@@ -77,9 +76,8 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 - (void)add:(id<FGPopupView>)view strategy:(FGPopupViewStrategy)pvs Priority:(FGPopupStrategyPriority)Priority{
-    /// 当前状态是否存在展示的弹窗
-    if (_hasPopupView && pvs == FGPopupViewStrategyAbandon) {
-        /// view被抛弃
+    if (self.canRegisterFirstPopupViewResponder && pvs == FGPopupViewStrategyAbandon) {
+        /// 当前状态存在已展示的弹窗则被抛弃
     }else{
         [_list addPopupView:view Priority:Priority];
     }
