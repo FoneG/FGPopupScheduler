@@ -110,3 +110,32 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 @end
+
+FGPopupScheduler * FGPopupSchedulerGetForPSS(FGPopupSchedulerStrategy pss){
+    if (pss & FGPopupSchedulerStrategyPriority) {
+        static dispatch_once_t onceToken;
+        static FGPopupScheduler *scheduler = nil;
+        dispatch_once(&onceToken, ^{
+            scheduler = [[FGPopupScheduler alloc] initWithStrategy:pss];
+        });
+        return scheduler;
+    }
+    else if (pss == FGPopupSchedulerStrategyFIFO) {
+        static dispatch_once_t onceToken;
+        static FGPopupScheduler *scheduler = nil;
+        dispatch_once(&onceToken, ^{
+            scheduler = [[FGPopupScheduler alloc] initWithStrategy:pss];
+        });
+        return scheduler;
+    }
+    else if(pss == FGPopupSchedulerStrategyLIFO){
+        static dispatch_once_t onceToken;
+        static FGPopupScheduler *scheduler = nil;
+        dispatch_once(&onceToken, ^{
+            scheduler = [[FGPopupScheduler alloc] initWithStrategy:pss];
+        });
+        return scheduler;
+    }else{
+        return nil;
+    }
+}

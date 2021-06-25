@@ -74,7 +74,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)registerFirstPopupViewResponder;
 
 
-
 @end
 
+/**
+ 获取一个指定调取策略全局的弹窗调度器
+ */
+extern FGPopupScheduler * FGPopupSchedulerGetForPSS(FGPopupSchedulerStrategy pss);
+
 NS_ASSUME_NONNULL_END
+
