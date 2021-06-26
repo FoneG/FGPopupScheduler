@@ -19,8 +19,12 @@
 
 - (void)showPopupViewWithAnimation:(FGPopupViewAnimationBlock)block{
     NSLog(@"%s", __func__);
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
     [UIView animateWithDuration:2 animations:^{
-        [self showPopupView];
+        self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
+        NSLog(@"animateWithDuration");
+    } completion:^(BOOL finished) {
+        block();
     }];
 }
 

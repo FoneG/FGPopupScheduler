@@ -41,9 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isEmpty;
 
 /**
- 返回当前是否已经有显示的弹窗
+ 返回是否能注册新的显示弹窗，如果当前已经有显示的弹窗返回NO
  */
-- (BOOL)hasFirstFirstPopupViewResponder;
+- (BOOL)canRegisterFirstFirstPopupViewResponder;
 @end
 
 NS_ASSUME_NONNULL_END

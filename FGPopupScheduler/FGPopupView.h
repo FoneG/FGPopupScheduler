@@ -24,12 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dismissPopupView;
 
 /*
- FGPopupSchedulerStrategyQueue会根据 -showPopupViewWithAnimation: 来监听显示逻辑
+ FGPopupSchedulerStrategyQueue会根据 -showPopupViewWithAnimation: 来监听显示逻辑。如果block不传可能会出现意料外的问题
  */
 - (void)showPopupViewWithAnimation:(FGPopupViewAnimationBlock)block;
 
 /*
- FGPopupSchedulerStrategyQueue会根据 -dismissPopupView: 来监听隐藏逻辑，如果含有动画请实现-dismissPopupViewWithAnimation:方法
+ FGPopupSchedulerStrategyQueue会根据 -dismissPopupView: 来监听隐藏逻辑，如果含有动画请实现-dismissPopupViewWithAnimation:方法，如果block不传可能会出现意料外的问题
  */
 - (void)dismissPopupViewWithAnimation:(FGPopupViewAnimationBlock)block;
 

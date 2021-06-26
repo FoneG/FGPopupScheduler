@@ -6,7 +6,6 @@
 //
 
 #import "FGPopupList.h"
-#import <pthread/pthread.h>
 #import <objc/runtime.h>
 #include <list>
 
@@ -15,7 +14,8 @@ using namespace std;
 @interface FGPopupList ()
 {
     list<PopupElement*> _list;
-    pthread_mutex_t _lock;
+    dispatch_semaphore_t _semaphore_t;
+    BOOL _clearFlag;   ///清除时同样被认为不能进行注册新响应者
 }
 @property (nonatomic, strong) PopupElement *FirstFirstResponderElement;
 @property (nonatomic, assign) BOOL hasFirstFirstResponder;
@@ -24,29 +24,30 @@ using namespace std;
 @implementation FGPopupList
 
 - (void)lock{
-    pthread_mutex_lock(&_lock);
+    intptr_t result = dispatch_semaphore_wait(_semaphore_t, DISPATCH_TIME_FOREVER);
+    if (result!=0) {
+        NSLog(@"lock failed: %ld", result);
+    }else{
+        NSLog(@"lock success");
+    }
 }
 
 - (void)unLock{
-    pthread_mutex_unlock(&_lock);
+    dispatch_semaphore_signal(_semaphore_t);
 }
 
-- (BOOL)hasFirstFirstPopupViewResponder{
+- (BOOL)canRegisterFirstFirstPopupViewResponder{
     [self lock];
-    BOOL hasFirstFirstResponder = self.hasFirstFirstResponder;
+    BOOL canRegisterFirstFirstPopupViewResponder = !self.hasFirstFirstResponder && !_clearFlag;
     [self unLock];
-    return hasFirstFirstResponder;
+    return canRegisterFirstFirstPopupViewResponder;
 }
 
 - (instancetype)init
 {
     self = [super init];
     if (self) {
-        pthread_mutexattr_t attr;
-        pthread_mutexattr_init(&attr);
-        pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
-        pthread_mutex_init(&_lock, &attr);
-        pthread_mutexattr_destroy(&attr);
+        _semaphore_t = dispatch_semaphore_create(1);
     }
     return self;
 }
@@ -67,33 +68,27 @@ using namespace std;
 }
 
 - (void)execute{
+    //fix：在其他线程尝试pthread_mutex_unlock操作会返回失败
     [self lock];
-    _hasFirstFirstResponder = YES;
-    NSLog(@"execute: _hasFirstFirstResponder %@", _hasFirstFirstResponder?@"yes":@"NO");
-    PopupElement *elemt = [self hitTestFirstPopupResponder];
+    self.hasFirstFirstResponder = YES;
+    PopupElement *elemt = [self _hitTestFirstPopupResponder];
     id<FGPopupView> view = elemt.data;
     if (!view) {
-        _hasFirstFirstResponder = NO;
+        self->_hasFirstFirstResponder = NO;
         [self unLock];
         return;
     }
-    _FirstFirstResponderElement = elemt;
-    WS(wSelf);
-    dispatch_async_main_safe((^(){
+    self.FirstFirstResponderElement = elemt;
+    [self unLock];
+    
+    dispatch_sync_main_safe(^(){
         if ([view respondsToSelector:@selector(showPopupViewWithAnimation:)]) {
-            [view showPopupViewWithAnimation:^{
-                SS(sSelf);
-                [sSelf unLock];
-            }];
-        }else if([view respondsToSelector:@selector(showPopupView)]){
-            [view showPopupView];
-            SS(sSelf);
-            [sSelf unLock];
-        }else{
-            SS(sSelf);
-            [sSelf unLock];
+            [view showPopupViewWithAnimation:^{}];
         }
-    }));
+        else if([view respondsToSelector:@selector(showPopupView)]){
+            [view showPopupView];
+        }
+    });
 }
 
 - (BOOL)isEmpty{
@@ -103,31 +98,41 @@ using namespace std;
 - (void)clear{
     [self lock];
     id<FGPopupView> data = self.FirstFirstResponderElement.data;
-    if (data) {
-        WS(wSelf);
-        dispatch_sync_main_safe(^(){
-            SS(sSelf);
-            if ([data respondsToSelector:@selector(dismissPopupView)]) {
-                [data dismissPopupView];
-                sSelf->_list.clear();
-                [sSelf unLock];
-            }
-            else if ([data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
-                [data dismissPopupViewWithAnimation:^{
-                    sSelf->_list.clear();
-                    [sSelf unLock];
-                }];
-            }
-        });
+    if (!data) {
+        [self unLock];
+        return;
     }
+    _clearFlag = YES;
+    _list.clear();
+    [self unLock];
+    
+    dispatch_async_main_safe(^(){
+        if ([data respondsToSelector:@selector(dismissPopupView)]) {
+            [data dismissPopupView];
+            [self lock];
+            self->_clearFlag = NO;
+            [self unLock];
+        }
+        else if ([data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
+            WS(wSelf);
+            [data dismissPopupViewWithAnimation:^{
+                SS(sSelf);
+                [sSelf lock];
+                sSelf->_clearFlag = NO;
+                [sSelf unLock];
+            }];
+        }
+    });
 }
+
+#pragma mark - Internal
 
 /*
  进行第一响应者测试并返回对应的节点
  
  @returns 作为第一响应者的节点
  */
-- (PopupElement *)hitTestFirstPopupResponder{
+- (PopupElement *)_hitTestFirstPopupResponder{
     list<PopupElement*>::iterator itor = _list.begin();
     PopupElement *element;
     do {
@@ -148,7 +153,6 @@ using namespace std;
     return element;
 }
 
-#pragma mark - Internal
 
 - (void)_push_back:(PopupElement *)e{
     _list.push_back(e);

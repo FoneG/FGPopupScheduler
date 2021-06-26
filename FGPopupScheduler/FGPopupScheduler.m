@@ -92,8 +92,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 - (BOOL)canRegisterFirstPopupViewResponder{
-    BOOL firstFirstPopupViewResponder = [_list hasFirstFirstPopupViewResponder];
-    return !firstFirstPopupViewResponder;
+    return [_list canRegisterFirstFirstPopupViewResponder];;
 }
 
 - (void)registerFirstPopupViewResponder{

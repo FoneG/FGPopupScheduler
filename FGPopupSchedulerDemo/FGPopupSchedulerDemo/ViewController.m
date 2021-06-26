@@ -29,6 +29,8 @@
     
     UIBarButtonItem *suspended = [[UIBarButtonItem alloc] initWithTitle:suspend?@"恢复":@"挂起" style:UIBarButtonItemStyleDone target:self action:@selector(suspendedState:)];
     UIBarButtonItem *pss = [[UIBarButtonItem alloc] initWithTitle:@"切换策略" style:UIBarButtonItemStyleDone target:self action:@selector(exchangeScheduler)];
+    UIBarButtonItem *clear = [[UIBarButtonItem alloc] initWithTitle:@"清空" style:UIBarButtonItemStyleDone target:self action:@selector(clearScheduler)];
+    self.navigationItem.leftBarButtonItem = clear;
     self.navigationItem.rightBarButtonItems = @[suspended, pss];
 
     
@@ -60,11 +62,13 @@
     PriorityPopupView *pop4 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
     PriorityPopupView *pop5 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
     
-    [Scheduler add:pop1];
-    [Scheduler add:pop2];
-    [Scheduler add:pop3];
-    [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
-    [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [Scheduler add:pop1];
+        [Scheduler add:pop2];
+//        [Scheduler add:pop3];
+//        [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+//        [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+    });
 }
 
 - (void)exchangeScheduler{
@@ -106,6 +110,10 @@
 
 - (IBAction)push:(id)sender {
     [self.navigationController pushViewController:[[BlueViewController alloc] init] animated:YES];
+}
+
+- (void)clearScheduler{
+    [self.Scheduler removeAllPopupViews];
 }
 
 @end

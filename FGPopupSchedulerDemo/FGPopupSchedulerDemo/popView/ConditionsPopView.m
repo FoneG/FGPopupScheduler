@@ -21,7 +21,6 @@
 
 - (BOOL)canRegisterFirstPopupViewResponder{
     BOOL touch = [[Uitl findCurrentShowingViewController] isKindOfClass:NSClassFromString(@"BlueViewController")];
-    NSLog(@"touch :%@", touch?@"yes":@"NO");
     return touch;
 }
 
