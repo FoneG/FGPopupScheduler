@@ -7,7 +7,7 @@
 
 iOS弹窗调用器，控制弹窗按照指定的策略进行显示    
 
-[详细介绍](https://note.youdao.com/s/INqEsalh)
+[详细介绍](https://juejin.cn/post/6977774991802630151)
 
 ## 特性
 - 简单易用：遵守协议后就能作为popup对象用调度器进行管理
@@ -64,3 +64,8 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
 
 
 ![image](https://note.youdao.com/yws/public/resource/5d0f46ddde197eb1269de27f6675abd2/xmlnote/WEBRESOURCEfc2aed555ac786e6b520aec9e1de6b09/14666)
+
+
+## 问题交流
+如果大家发现bug或者需求，请在GitHub提issue    
+好用的话，请路过的朋友们给点个star 🙏🙏🙏🙏🙏
