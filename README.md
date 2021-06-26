@@ -7,7 +7,7 @@
 
 iOS弹窗调用器，控制弹窗按照指定的策略进行显示    
 
-[详细介绍](https://note.youdao.com/s/INqEsalh)
+[详细介绍](https://juejin.cn/post/6977774991802630151)
 
 ## 特性
 - 简单易用：遵守协议后就能作为popup对象用调度器进行管理
