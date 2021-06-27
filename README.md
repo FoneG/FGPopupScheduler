@@ -3,6 +3,7 @@
 [![CI Status](https://img.shields.io/travis/15757127193@163.com/FGPopupScheduler.svg?style=flat)](https://travis-ci.org/15757127193@163.com/FGPopupScheduler)
 [![Version](https://img.shields.io/cocoapods/v/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 [![License](https://img.shields.io/cocoapods/l/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
+[![Support](https://img.shields.io/badge/support-iOS%206%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 [![Platform](https://img.shields.io/cocoapods/p/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 
 iOS弹窗调用器，控制弹窗按照指定的策略进行显示    
