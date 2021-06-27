@@ -159,9 +159,6 @@ using namespace std;
 
 - (void)_push_front:(PopupElement *)e{
     _list.push_front(e);
-    
-    list<PopupElement*>::iterator it = _list.begin();
-    PopupElement *elemnt = *it;
 }
 
 - (void)_insert:(PopupElement *)e index:(int)index{
