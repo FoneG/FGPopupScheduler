@@ -23,7 +23,7 @@ static NSHashTable *FGPopupSchedulers(void) {
 
 static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info){
     for (FGPopupScheduler *scheduler in FGPopupSchedulers()) {
-        if (![scheduler isEmpty] && [scheduler canRegisterFirstPopupViewResponder]) {
+        if (![scheduler isEmpty]) {
             [scheduler registerFirstPopupViewResponder];
         }
     }
@@ -80,6 +80,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
         /// 当前状态存在已展示的弹窗则被抛弃
     }else{
         [_list addPopupView:view Priority:Priority];
+        [self registerFirstPopupViewResponder];
     }
 }
 
@@ -107,7 +108,7 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 
 - (void)setSuspended:(BOOL)suspended{
     _suspended = suspended;
-    [self registerFirstPopupViewResponder];
+    if (!suspended) [self registerFirstPopupViewResponder];
 }
 @end
 

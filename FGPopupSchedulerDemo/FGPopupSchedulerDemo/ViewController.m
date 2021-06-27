@@ -22,7 +22,7 @@
 
 @implementation ViewController
 
-static BOOL suspendState = YES;
+static BOOL suspendState = NO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,7 +36,7 @@ static BOOL suspendState = YES;
     self.navigationItem.leftBarButtonItem = clear;
     self.navigationItem.rightBarButtonItems = @[suspended, pss];
 
-    
+
     [self setState:FGPopupSchedulerStrategyPriority|FGPopupSchedulerStrategyLIFO];
     [self fillPopupViews];
 }
@@ -66,9 +66,9 @@ static BOOL suspendState = YES;
     BasePopupView *pop5 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
     
     PopupViewHandler *handler = [[PopupViewHandler alloc] initWithDescrption:@"弹窗组手" scheduler:Scheduler];
-    
+
+    [Scheduler add:pop1];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [Scheduler add:pop1];
         [Scheduler add:pop2];
         [Scheduler add:pop3];
         [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
