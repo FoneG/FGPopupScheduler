@@ -27,8 +27,6 @@ using namespace std;
     intptr_t result = dispatch_semaphore_wait(_semaphore_t, DISPATCH_TIME_FOREVER);
     if (result!=0) {
         NSLog(@"lock failed: %ld", result);
-    }else{
-        NSLog(@"lock success");
     }
 }
 
@@ -73,6 +71,8 @@ using namespace std;
     self.hasFirstFirstResponder = YES;
     PopupElement *elemt = [self _hitTestFirstPopupResponder];
     id<FGPopupView> view = elemt.data;
+    NSLog(@"data:%@ size: %ld", elemt.data, _list.size());
+
     if (!view) {
         self->_hasFirstFirstResponder = NO;
         [self unLock];
@@ -169,6 +169,7 @@ using namespace std;
         index--;
     }
     _list.insert(it, e);
+    NSLog(@"data:%@ size: %ld", e.data, _list.size());
 }
 
 - (void)_rm:(PopupElement *)elemt{

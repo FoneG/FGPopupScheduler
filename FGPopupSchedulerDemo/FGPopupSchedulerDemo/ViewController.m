@@ -14,6 +14,7 @@
 #import "FGPopupScheduler.h"
 #import "BlueViewController.h"
 #import "FGPopupList.h"
+#import "PopupViewHandler.h"
 
 @interface ViewController ()
 @property (nonatomic, weak) FGPopupScheduler *Scheduler;
@@ -21,11 +22,13 @@
 
 @implementation ViewController
 
+static BOOL suspendState = YES;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    BOOL suspend = YES;
+    BOOL suspend = suspendState;
     
     UIBarButtonItem *suspended = [[UIBarButtonItem alloc] initWithTitle:suspend?@"恢复":@"挂起" style:UIBarButtonItemStyleDone target:self action:@selector(suspendedState:)];
     UIBarButtonItem *pss = [[UIBarButtonItem alloc] initWithTitle:@"切换策略" style:UIBarButtonItemStyleDone target:self action:@selector(exchangeScheduler)];
@@ -35,12 +38,12 @@
 
     
     [self setState:FGPopupSchedulerStrategyPriority|FGPopupSchedulerStrategyLIFO];
-    self.Scheduler.suspended = suspend;
     [self fillPopupViews];
 }
 
 - (void)setState:(FGPopupSchedulerStrategy)pss{
     FGPopupScheduler *Scheduler = FGPopupSchedulerGetForPSS(pss);
+    Scheduler.suspended = suspendState;
     self.Scheduler = Scheduler;
     
     if (pss & FGPopupSchedulerStrategyPriority) {
@@ -59,15 +62,18 @@
     BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop1" scheduler:Scheduler];
     AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
     ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3" scheduler:Scheduler];
-    PriorityPopupView *pop4 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
-    PriorityPopupView *pop5 =  [[PriorityPopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
+    BasePopupView *pop4 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
+    BasePopupView *pop5 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
+    
+    PopupViewHandler *handler = [[PopupViewHandler alloc] initWithDescrption:@"弹窗组手" scheduler:Scheduler];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [Scheduler add:pop1];
         [Scheduler add:pop2];
-//        [Scheduler add:pop3];
-//        [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
-//        [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        [Scheduler add:pop3];
+        [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        [Scheduler add:handler strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
     });
 }
 

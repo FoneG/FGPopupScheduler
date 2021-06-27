@@ -56,7 +56,11 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self dismissPopupView];
+    if (self.touchCallBack) {
+        self.touchCallBack();
+    }else{
+        [self dismissPopupView];
+    }
 }
 
 @end
