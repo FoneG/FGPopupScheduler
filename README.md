@@ -10,7 +10,7 @@ iOS弹窗调用器，控制弹窗按照指定的策略进行显示
 [详细介绍](https://juejin.cn/post/6977774991802630151)
 
 ## 特性
-- 简单易用：遵守协议后就能作为popup对象用调度器进行管理
+- 低入侵性：遵守协议后就能作为popup对象用调度器进行管理，对项目的入侵小
 - 策略模式：利用 C++ 链表实现三种调度策略，性能优越。
 - 线程安全：对所有操作添加了信号量控制，保证线程安全
 - 自动触发：监听Runloop，在每次主线程空闲时就会触发调度器进行hitTest
@@ -45,9 +45,16 @@ AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrpti
 [Scheduler add:pop1];
 [Scheduler add:pop2 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
 
-```
-注意该组件使用实例化方式使用，为了避免任务调度器提前释放，需要外部对其进行强持有（建议作为调用方的属性或实例变量）。
 
+/// 如果希望提前预存弹窗, 可以使用挂起模式.
+Scheduler.suspended = YES;
+
+```
+注意该组件使用实例化方式使用，为了避免弹窗调度器提前释放，需要外部对其进行强持有（建议作为调用方的属性或实例变量）。
+
+### 
+
+```
 
 ### 调度策略
 
