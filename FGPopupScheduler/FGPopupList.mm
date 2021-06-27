@@ -71,7 +71,6 @@ using namespace std;
     self.hasFirstFirstResponder = YES;
     PopupElement *elemt = [self _hitTestFirstPopupResponder];
     id<FGPopupView> view = elemt.data;
-    NSLog(@"data:%@ size: %ld", elemt.data, _list.size());
 
     if (!view) {
         self->_hasFirstFirstResponder = NO;
@@ -160,6 +159,9 @@ using namespace std;
 
 - (void)_push_front:(PopupElement *)e{
     _list.push_front(e);
+    
+    list<PopupElement*>::iterator it = _list.begin();
+    PopupElement *elemnt = *it;
 }
 
 - (void)_insert:(PopupElement *)e index:(int)index{
@@ -169,7 +171,6 @@ using namespace std;
         index--;
     }
     _list.insert(it, e);
-    NSLog(@"data:%@ size: %ld", e.data, _list.size());
 }
 
 - (void)_rm:(PopupElement *)elemt{
