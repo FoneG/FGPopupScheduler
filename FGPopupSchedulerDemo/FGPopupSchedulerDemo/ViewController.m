@@ -59,6 +59,8 @@ static BOOL suspendState = NO;
 
 - (void)fillPopupViews{
     FGPopupScheduler *Scheduler = self.Scheduler;
+    Scheduler.suspended = YES;
+
     BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop1" scheduler:Scheduler];
     AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
     ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3" scheduler:Scheduler];
@@ -74,6 +76,8 @@ static BOOL suspendState = NO;
         [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         [Scheduler add:handler strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        
+        Scheduler.suspended = NO;
     });
 }
 
