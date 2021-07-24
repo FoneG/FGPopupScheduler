@@ -66,6 +66,16 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
 
 可以根据需求选择合适的策略，另外实际上还可以结合 FGPopupSchedulerStrategyPriority | FGPopupSchedulerStrategyFIFO 一起使用，来处理当选择优先级策略时，如何决定同一优先级弹窗的排序。
 
+### 触发策略
+
+目前仅支持2种触发行为, 用户可以根据它来决定，当弹窗触发显示逻辑时是否要继续等待
+```
+typedef NS_ENUM(NSUInteger, FGPopupViewUntriggeredBehavior) {
+    FGPopupViewUntriggeredBehaviorDiscard,          //未满足条件时会被直接丢弃
+    FGPopupViewUntriggeredBehaviorAwait,          //未满足条件时会继续等待
+};
+```
+
 
 ![image](https://note.youdao.com/yws/public/resource/5d0f46ddde197eb1269de27f6675abd2/xmlnote/WEBRESOURCEfc2aed555ac786e6b520aec9e1de6b09/14666)
 
