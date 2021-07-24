@@ -38,12 +38,13 @@ static BOOL suspendState = NO;
 
 
     [self setState:FGPopupSchedulerStrategyPriority|FGPopupSchedulerStrategyLIFO];
+
     [self fillPopupViews];
 }
 
 - (void)setState:(FGPopupSchedulerStrategy)pss{
     FGPopupScheduler *Scheduler = FGPopupSchedulerGetForPSS(pss);
-    Scheduler.suspended = suspendState;
+//    Scheduler.suspended = suspendState;
     self.Scheduler = Scheduler;
     
     if (pss & FGPopupSchedulerStrategyPriority) {
@@ -78,7 +79,7 @@ static BOOL suspendState = NO;
         [Scheduler add:pop3];
         [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
-        [Scheduler add:pop6 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityHigh];
+        [Scheduler add:pop6 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityVeryLow];
         [Scheduler add:handler strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         
         Scheduler.suspended = NO;

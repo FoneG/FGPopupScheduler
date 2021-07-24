@@ -26,6 +26,7 @@ using namespace std;
 
 - (void)lock{
     intptr_t result = dispatch_semaphore_wait(_semaphore_t, DISPATCH_TIME_FOREVER);
+    NSLog(@"-------------- %@", [NSThread currentThread]);
     if (result!=0) {
         NSLog(@"lock failed: %ld", result);
     }
@@ -33,6 +34,7 @@ using namespace std;
 
 - (void)unLock{
     dispatch_semaphore_signal(_semaphore_t);
+    NSLog(@"+++++++++++++++++ %@", [NSThread currentThread]);
 }
 
 - (BOOL)canRegisterFirstFirstPopupViewResponder{
@@ -67,21 +69,21 @@ using namespace std;
 }
 
 - (void)execute{
-    //fix：在其他线程尝试pthread_mutex_unlock操作会返回失败
     [self lock];
     self.hasFirstFirstResponder = YES;
-    PopupElement *elemt = [self _hitTestFirstPopupResponder];
-    id<FGPopupView> view = elemt.data;
-
-    if (!view) {
-        self->_hasFirstFirstResponder = NO;
-        [self unLock];
-        return;
-    }
-    self.FirstFirstResponderElement = elemt;
     [self unLock];
-    
+    /// 这里提前切换到主线程 是为了保证当前消耗的信号能够在 -execute 操作执行结束前能够发送一个新信号
     dispatch_sync_main_safe(^(){
+        PopupElement *elemt = [self _hitTestFirstPopupResponder];
+        id<FGPopupView> view = elemt.data;
+        if (!view) {
+            [self lock];
+            self->_hasFirstFirstResponder = NO;
+            [self unLock];
+            return;
+        }
+        self.FirstFirstResponderElement = elemt;
+        
         if ([view respondsToSelector:@selector(showPopupViewWithAnimation:)]) {
             [view showPopupViewWithAnimation:^{}];
         }
@@ -137,9 +139,7 @@ using namespace std;
         id<FGPopupView> data = temp.data;
         __block BOOL canRegisterFirstPopupViewResponder = YES;
         if ([data respondsToSelector:@selector(canRegisterFirstPopupViewResponder)]) {
-            dispatch_sync_main_safe(^(){
-                canRegisterFirstPopupViewResponder = [data canRegisterFirstPopupViewResponder];
-            });
+            canRegisterFirstPopupViewResponder = [data canRegisterFirstPopupViewResponder];
         }
         
         if (canRegisterFirstPopupViewResponder) {
@@ -148,7 +148,7 @@ using namespace std;
         }
         /// 这里只能由为显示的popup所触发
         else if([data respondsToSelector:@selector(popupViewUntriggeredBehavior)] && [data popupViewUntriggeredBehavior] == FGPopupViewUntriggeredBehaviorDiscard){
-            itor = _list.erase(itor);
+            itor = _list.erase(itor++);
         }
         else{
             itor++;
