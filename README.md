@@ -1,13 +1,13 @@
 # FGPopupScheduler
 
-[![CI Status](https://img.shields.io/travis/15757127193@163.com/FGPopupScheduler.svg?style=flat)](https://travis-ci.org/15757127193@163.com/FGPopupScheduler)
+[![Support](https://img.shields.io/badge/support-iOS%206%2B%20-blue.svg?style=flat)](https://www.apple.com/nl/ios/)&nbsp;
 [![Version](https://img.shields.io/cocoapods/v/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 [![License](https://img.shields.io/cocoapods/l/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 [![Platform](https://img.shields.io/cocoapods/p/FGPopupScheduler.svg?style=flat)](https://cocoapods.org/pods/FGPopupScheduler)
 
 iOS弹窗调用器，控制弹窗按照指定的策略进行显示    
 
-[详细介绍](https://juejin.cn/post/6977774991802630151)
+[详细介绍](https://juejin.cn/post/6979459370807476261)
 
 ## 特性
 - 低入侵性：遵守协议后就能作为popup对象用调度器进行管理，对项目的入侵小
@@ -71,5 +71,5 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
 
 
 ## 问题交流
-如果大家发现bug或者需求，请在GitHub提issue    
-好用的话，请路过的朋友们给点个star 🙏🙏🙏🙏🙏
+发现bug或者需求，请在GitHub提issue    
+如果喜欢，请顺手我一个star吧~ ：）
