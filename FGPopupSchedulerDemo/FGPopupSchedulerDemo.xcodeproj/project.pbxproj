@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B43D2D5E26AAC7DB0012BF90 /* FGPopupList+Monitor.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D2D5D26AAC7DB0012BF90 /* FGPopupList+Monitor.m */; };
+		B43D2D6226AAC9AC0012BF90 /* NSObject+SwizzleMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B43D2D6126AAC9AC0012BF90 /* NSObject+SwizzleMethod.m */; };
 		B46F2F172685969200601E29 /* FGPopupStack.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F2F162685969200601E29 /* FGPopupStack.m */; };
 		B46F2F1B26859A6500601E29 /* FGPopupPriorityList.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F2F1A26859A6500601E29 /* FGPopupPriorityList.m */; };
 		B46F2F212685A89B00601E29 /* PriorityPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = B46F2F202685A89B00601E29 /* PriorityPopupView.m */; };
@@ -30,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B43D2D5C26AAC7DB0012BF90 /* FGPopupList+Monitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FGPopupList+Monitor.h"; sourceTree = "<group>"; };
+		B43D2D5D26AAC7DB0012BF90 /* FGPopupList+Monitor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "FGPopupList+Monitor.m"; sourceTree = "<group>"; };
+		B43D2D6026AAC9AC0012BF90 /* NSObject+SwizzleMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SwizzleMethod.h"; sourceTree = "<group>"; };
+		B43D2D6126AAC9AC0012BF90 /* NSObject+SwizzleMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SwizzleMethod.m"; sourceTree = "<group>"; };
 		B46F2F152685969200601E29 /* FGPopupStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupStack.h; sourceTree = "<group>"; };
 		B46F2F162685969200601E29 /* FGPopupStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FGPopupStack.m; sourceTree = "<group>"; };
 		B46F2F1926859A6500601E29 /* FGPopupPriorityList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupPriorityList.h; sourceTree = "<group>"; };
@@ -130,6 +136,8 @@
 				B491BD722684586B00281EDC /* FGPopupList.h */,
 				B491BD732684586C00281EDC /* FGPopupList.mm */,
 				B491BE0726847CE900281EDC /* FGPopupList+Internal.h */,
+				B43D2D5C26AAC7DB0012BF90 /* FGPopupList+Monitor.h */,
+				B43D2D5D26AAC7DB0012BF90 /* FGPopupList+Monitor.m */,
 				B46F2F1926859A6500601E29 /* FGPopupPriorityList.h */,
 				B46F2F1A26859A6500601E29 /* FGPopupPriorityList.m */,
 				B48AAB5226830C030081381E /* FGPopupQueue.h */,
@@ -141,6 +149,8 @@
 				B46F2F152685969200601E29 /* FGPopupStack.h */,
 				B46F2F162685969200601E29 /* FGPopupStack.m */,
 				B48AAB4E2682E19C0081381E /* FGPopupView.h */,
+				B43D2D6026AAC9AC0012BF90 /* NSObject+SwizzleMethod.h */,
+				B43D2D6126AAC9AC0012BF90 /* NSObject+SwizzleMethod.m */,
 			);
 			name = FGPopupScheduler;
 			path = ../../FGPopupScheduler;
@@ -251,10 +261,12 @@
 				B48AAB322682E12A0081381E /* AppDelegate.m in Sources */,
 				B491BCD1268356B100281EDC /* AnimationShowPopupView.m in Sources */,
 				B46F2F172685969200601E29 /* FGPopupStack.m in Sources */,
+				B43D2D6226AAC9AC0012BF90 /* NSObject+SwizzleMethod.m in Sources */,
 				B46F2F1B26859A6500601E29 /* FGPopupPriorityList.m in Sources */,
 				B491BCDF2683592900281EDC /* BlueViewController.m in Sources */,
 				B48AAB5426830C030081381E /* FGPopupQueue.m in Sources */,
 				B491BCCB2683557C00281EDC /* BasePopupView.m in Sources */,
+				B43D2D5E26AAC7DB0012BF90 /* FGPopupList+Monitor.m in Sources */,
 				B48AAB432682E12C0081381E /* main.m in Sources */,
 				B491BD742684586C00281EDC /* FGPopupList.mm in Sources */,
 				B491BCDA268358EF00281EDC /* UIView+Category.m in Sources */,

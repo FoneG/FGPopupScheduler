@@ -8,6 +8,7 @@
 #import "FGPopupList.h"
 #import <objc/runtime.h>
 #include <list>
+#import "FGPopupList+Monitor.h"
 
 using namespace std;
 
@@ -53,7 +54,7 @@ using namespace std;
 #pragma mark - FGPopupSchedulerStrategyQueue
 
 - (void)addPopupView:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)Priority{
-    @throw([NSException exceptionWithName:@"FGPopupList" reason:@"You must overWrite this method!" userInfo:nil]);
+    [self monitorRemoveEventWith:view];
 }
 
 - (void)removePopupView:(id<FGPopupView>)view{

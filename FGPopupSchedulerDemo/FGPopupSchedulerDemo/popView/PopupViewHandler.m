@@ -28,7 +28,6 @@
 
 - (void)dismissPopupView{
     [self.popView removeFromSuperview];
-    [self.popView.scheduler remove:self];
 }
 
 @end

@@ -28,4 +28,26 @@
     }];
 }
 
+
+- (void)dismissWithAnimation:(FGPopupViewAnimationBlock)block{
+    [UIView animateWithDuration:2 animations:^{
+        self.frame =CGRectMake(0, [UIScreen mainScreen].bounds.size.height, self.bounds.size.width, self.bounds.size.height);
+    } completion:^(BOOL finished) {
+        if (block) {
+            block();
+        }
+        [self removeFromSuperview];
+    }];
+    
+}
+
+- (void)dismissPopupViewWithAnimation:(FGPopupViewAnimationBlock)block{
+    [self dismissWithAnimation:block];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self dismissPopupViewWithAnimation:^{
+        NSLog(@"dismissPopupViewWithAnimation callBlock");
+    }];
+}
 @end

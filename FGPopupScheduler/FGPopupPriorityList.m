@@ -12,6 +12,8 @@
 
 - (void)addPopupView:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)Priority{
     [self lock];
+    [super addPopupView:view Priority:Priority];
+
     __block int index = 0;
     /// create FIFO
     [self _enumerateObjectsUsingBlock:^(PopupElement * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

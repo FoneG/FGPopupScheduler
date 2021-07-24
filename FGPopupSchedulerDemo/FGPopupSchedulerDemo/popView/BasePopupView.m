@@ -52,7 +52,6 @@
 - (void)dismissPopupView{
     NSLog(@"%s", __func__);
     [self removeFromSuperview];
-    [_scheduler remove:self];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
