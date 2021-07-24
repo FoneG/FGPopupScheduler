@@ -21,6 +21,12 @@ typedef NS_ENUM(NSUInteger, FGPopupViewStrategy) {
     FGPopupViewStrategyAbandon,       //抛弃
 };
 
+
+typedef NS_ENUM(NSUInteger, FGPopupViewUntriggeredBehavior) {
+    FGPopupViewUntriggeredBehaviorDiscard,          //弹窗产生时，但未满足条件时直接丢弃
+    FGPopupViewUntriggeredBehaviorAwait,          //弹窗产生时，但未满足条件时会继续等待
+};
+
 typedef NSUInteger FGPopupStrategyPriority;
 static const FGPopupStrategyPriority FGPopupStrategyPriorityVeryLow = 1;
 static const FGPopupStrategyPriority FGPopupStrategyPriorityLow = 50;

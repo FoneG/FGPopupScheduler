@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ConditionsPopView : BasePopupView
-
+@property (nonatomic, assign) FGPopupViewUntriggeredBehavior UntriggeredBehavior;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -39,6 +39,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)canRegisterFirstPopupViewResponder;
 
 
+
+/** 0.2.0 新增*/
+
+/**
+ FGPopupSchedulerStrategyQueue 会根据 - popupViewUntriggeredBehavior：来决定触发时弹窗的显示行为，默认为 FGPopupViewUntriggeredBehaviorAwait
+ */
+- (FGPopupViewUntriggeredBehavior)popupViewUntriggeredBehavior;
+
 @end
 
 NS_ASSUME_NONNULL_END

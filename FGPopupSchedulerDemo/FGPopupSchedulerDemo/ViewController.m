@@ -63,9 +63,12 @@ static BOOL suspendState = NO;
 
     BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop1" scheduler:Scheduler];
     AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
-    ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3" scheduler:Scheduler];
+    ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3 Discard" scheduler:Scheduler];
+    pop3.UntriggeredBehavior = FGPopupViewUntriggeredBehaviorDiscard;
     BasePopupView *pop4 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
     BasePopupView *pop5 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
+    ConditionsPopView *pop6 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop6 wait" scheduler:Scheduler];
+    pop6.UntriggeredBehavior = FGPopupViewUntriggeredBehaviorAwait;
     
     PopupViewHandler *handler = [[PopupViewHandler alloc] initWithDescrption:@"弹窗组手" scheduler:Scheduler];
 
@@ -75,6 +78,7 @@ static BOOL suspendState = NO;
         [Scheduler add:pop3];
         [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        [Scheduler add:pop6 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityHigh];
         [Scheduler add:handler strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         
         Scheduler.suspended = NO;

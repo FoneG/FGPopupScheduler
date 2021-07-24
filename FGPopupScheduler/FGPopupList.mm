@@ -125,17 +125,14 @@ using namespace std;
     });
 }
 
-#pragma mark - Internal
-
 /*
  进行第一响应者测试并返回对应的节点
  
  @returns 作为第一响应者的节点
  */
 - (PopupElement *)_hitTestFirstPopupResponder{
-    list<PopupElement*>::iterator itor = _list.begin();
     PopupElement *element;
-    do {
+    for(auto itor=_list.begin(); itor!=_list.end();) {
         PopupElement *temp = *itor;
         id<FGPopupView> data = temp.data;
         __block BOOL canRegisterFirstPopupViewResponder = YES;
@@ -144,14 +141,23 @@ using namespace std;
                 canRegisterFirstPopupViewResponder = [data canRegisterFirstPopupViewResponder];
             });
         }
+        
         if (canRegisterFirstPopupViewResponder) {
             element = temp;
             break;
         }
-        itor++;
-    } while (itor!=_list.end());
+        /// 这里只能由为显示的popup所触发
+        else if([data respondsToSelector:@selector(popupViewUntriggeredBehavior)] && [data popupViewUntriggeredBehavior] == FGPopupViewUntriggeredBehaviorDiscard){
+            itor = _list.erase(itor);
+        }
+        else{
+            itor++;
+        }
+    }
     return element;
 }
+
+#pragma mark - Internal
 
 
 - (void)_push_back:(PopupElement *)e{

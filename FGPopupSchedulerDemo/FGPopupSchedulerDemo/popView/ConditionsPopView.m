@@ -24,4 +24,8 @@
     return touch;
 }
 
+- (FGPopupViewUntriggeredBehavior)popupViewUntriggeredBehavior{
+    return self.UntriggeredBehavior;
+}
+
 @end
