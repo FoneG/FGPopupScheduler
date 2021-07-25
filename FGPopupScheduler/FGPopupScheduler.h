@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithStrategy:(FGPopupSchedulerStrategy)pss;
 
 /**
- 向队列插入一个弹窗，FGPopupScheduler会根据设置的策略状态来控制在队列中插入的位置, 弹窗默认使用FGPopupViewStrategyKeep策略。如果条件允许（通过-hitTest），将会通过-showPopupViewWithAnimation or -showPopupView 显示。 支持线程安全
+ 向队列插入一个弹窗，FGPopupScheduler会根据设置的策略状态来控制在队列中插入的位置,  如果条件允许（通过-hitTest），将会通过-showPopupViewWithAnimation or -showPopupView 显示。 支持线程安全
  
  @param view 弹窗实例
  */

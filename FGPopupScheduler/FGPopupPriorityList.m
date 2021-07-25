@@ -56,13 +56,13 @@
 }
 
 - (void)discardPopupElemnt:(PopupElement *)element{
-    if ([element.data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
+    if([element.data respondsToSelector:@selector(dismissPopupView)]){
+        [element.data dismissPopupView];
+    }
+    else if ([element.data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
         [element.data dismissPopupViewWithAnimation:^{
             NSLog(@"-dismissPopupViewWithAnimation: Triggered by a higher priority popover");
         }];
-    }
-    else if([element.data respondsToSelector:@selector(dismissPopupView)]){
-        [element.data dismissPopupView];
     }
 }
 
