@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDescrption:(NSString *)des scheduler:(FGPopupScheduler*)scheduler;
 
 @property (nonatomic, strong, readonly) FGPopupScheduler *scheduler;
+@property (nonatomic, assign) FGPopupViewSwitchBehavior behavior;
 @property (nonatomic, copy) void(^touchCallBack)(void) ;
 
 @end

@@ -26,11 +26,24 @@
                                     <action selector="push:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ogl-Bd-Jad"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksB-HW-PQF">
+                                <rect key="frame" x="131" y="167" width="153" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="插入一个高优先级弹窗">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="jumpHighPriorityPopupView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K9W-0V-D4d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="QWl-3D-ASa"/>
+                    <connections>
+                        <outlet property="insertHightPopupButton" destination="ksB-HW-PQF" id="5m8-J1-efz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

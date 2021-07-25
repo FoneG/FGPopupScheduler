@@ -6,17 +6,19 @@
 //
 
 #import "ViewController.h"
+#import "BlueViewController.h"
+
 #import "BasePopupView.h"
 #import "AnimationShowPopupView.h"
 #import "ConditionsPopView.h"
 #import "PriorityPopupView.h"
-
-#import "FGPopupScheduler.h"
-#import "BlueViewController.h"
-#import "FGPopupList.h"
 #import "PopupViewHandler.h"
 
+#import "FGPopupScheduler.h"
+#import "FGPopupList.h"
+
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *insertHightPopupButton;
 @property (nonatomic, weak) FGPopupScheduler *Scheduler;
 @end
 
@@ -46,7 +48,8 @@ static BOOL suspendState = NO;
     FGPopupScheduler *Scheduler = FGPopupSchedulerGetForPSS(pss);
 //    Scheduler.suspended = suspendState;
     self.Scheduler = Scheduler;
-    
+
+    self.insertHightPopupButton.hidden = !(pss & FGPopupSchedulerStrategyPriority);
     if (pss & FGPopupSchedulerStrategyPriority) {
         self.title = pss & FGPopupSchedulerStrategyLIFO ? @"优先级 & LIFO": @"优先级 & FIFO";
     }
@@ -62,25 +65,26 @@ static BOOL suspendState = NO;
     FGPopupScheduler *Scheduler = self.Scheduler;
     Scheduler.suspended = YES;
 
-    BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop1" scheduler:Scheduler];
+    BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"switch行为弹窗 pop" scheduler:Scheduler];
+    
     AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
     ConditionsPopView *pop3 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3 Discard" scheduler:Scheduler];
     pop3.UntriggeredBehavior = FGPopupViewUntriggeredBehaviorDiscard;
-    BasePopupView *pop4 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop4" scheduler:Scheduler];
-    BasePopupView *pop5 =  [[BasePopupView alloc] initWithDescrption:@"优先级动画 pop5" scheduler:Scheduler];
+    PriorityPopupView *pop4 =  [[PriorityPopupView alloc] initWithDescrption:@"高优先级动画 pop4" scheduler:Scheduler];
+    PriorityPopupView *pop5 =  [[PriorityPopupView alloc] initWithDescrption:@"低优先级动画 pop5" scheduler:Scheduler];
     ConditionsPopView *pop6 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop6 wait" scheduler:Scheduler];
     pop6.UntriggeredBehavior = FGPopupViewUntriggeredBehaviorAwait;
     
     PopupViewHandler *handler = [[PopupViewHandler alloc] initWithDescrption:@"弹窗组手" scheduler:Scheduler];
 
-    [Scheduler add:pop1];
+    [Scheduler add:pop1 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityVeryHigh];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [Scheduler add:pop2];
         [Scheduler add:pop3];
-        [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        [Scheduler add:pop4 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityHigh];
         [Scheduler add:pop5 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
         [Scheduler add:pop6 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityVeryLow];
-        [Scheduler add:handler strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
+        [Scheduler add:handler];
         
         Scheduler.suspended = NO;
     });
@@ -125,6 +129,11 @@ static BOOL suspendState = NO;
 
 - (IBAction)push:(id)sender {
     [self.navigationController pushViewController:[[BlueViewController alloc] init] animated:YES];
+}
+- (IBAction)jumpHighPriorityPopupView:(id)sender {
+    
+    BasePopupView *pop =  [[BasePopupView alloc] initWithDescrption:@"VeryHigh PopupView" scheduler:self.Scheduler];
+    [self.Scheduler add:pop strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityVeryHigh];
 }
 
 - (void)clearScheduler{

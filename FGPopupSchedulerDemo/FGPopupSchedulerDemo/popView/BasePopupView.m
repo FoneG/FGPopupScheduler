@@ -6,6 +6,7 @@
 //
 
 #import "BasePopupView.h"
+#import "Uitl.h"
 
 @implementation BasePopupView
 
@@ -36,8 +37,10 @@
         label.textColor = [UIColor blackColor];
         label.backgroundColor = [UIColor clearColor];
         label.textAlignment = NSTextAlignmentCenter;
+        label.numberOfLines = 0;
         [self addSubview:label];
         
+        _behavior = FGPopupViewSwitchBehaviorAwait;
         _scheduler = scheduler;
     }
     return self;
@@ -46,7 +49,7 @@
 - (void)showPopupView{
     NSLog(@"%s", __func__);
     self.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2);
-    [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [[Uitl findCurrentShowingViewController].view addSubview:self];
 }
 
 - (void)dismissPopupView{
@@ -60,6 +63,10 @@
     }else{
         [self dismissPopupView];
     }
+}
+
+- (FGPopupViewSwitchBehavior)popupViewSwitchBehavior{
+    return self.behavior;
 }
 
 @end

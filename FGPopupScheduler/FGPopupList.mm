@@ -59,11 +59,13 @@ using namespace std;
     [self monitorRemoveEventWith:view];
 }
 
+
 - (void)removePopupView:(id<FGPopupView>)view{
     [self lock];
     [self _rm_data:view];
     if (_FirstFirstResponderElement.data == view) {
         _hasFirstFirstResponder = NO;
+        _FirstFirstResponderElement = nil;
     }
     [self unLock];
 }

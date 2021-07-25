@@ -21,10 +21,15 @@ typedef NS_ENUM(NSUInteger, FGPopupViewStrategy) {
     FGPopupViewStrategyAbandon,       //抛弃
 };
 
+typedef NS_ENUM(NSUInteger, FGPopupViewSwitchBehavior) {
+    FGPopupViewSwitchBehaviorDiscard,  //当该弹窗已经显示，如果后面来了弹窗优先级更高的弹窗时，显示更高优先级弹窗并且当前弹窗会被抛弃
+    FGPopupViewSwitchBehaviorLatent,   //当该弹窗已经显示，如果后面来了弹窗优先级更高的弹窗时，显示更高优先级弹窗并且当前弹窗重新进入队列
+    FGPopupViewSwitchBehaviorAwait,    //当该弹窗已经显示时，不会被后续高优线级的弹窗影响
+};
 
 typedef NS_ENUM(NSUInteger, FGPopupViewUntriggeredBehavior) {
-    FGPopupViewUntriggeredBehaviorDiscard,          //弹窗产生时，但未满足条件时直接丢弃
-    FGPopupViewUntriggeredBehaviorAwait,          //弹窗产生时，但未满足条件时会继续等待
+    FGPopupViewUntriggeredBehaviorDiscard,          //当弹窗触发显示逻辑，但未满足条件时会被直接丢弃
+    FGPopupViewUntriggeredBehaviorAwait,          //当弹窗触发显示逻辑，但未满足条件时会继续等待
 };
 
 typedef NSUInteger FGPopupStrategyPriority;

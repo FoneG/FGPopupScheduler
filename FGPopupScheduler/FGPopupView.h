@@ -47,6 +47,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (FGPopupViewUntriggeredBehavior)popupViewUntriggeredBehavior;
 
+
+/**
+ FGPopupViewSwitchBehavior 会根据 - popupViewSwitchBehavior：来决定已经显示的弹窗，是否会被后续更高优先级的弹窗锁影响，默认为 FGPopupViewSwitchBehaviorAwait  ⚠️⚠️ 只在FGPopupSchedulerStrategyPriority生效
+ */
+- (FGPopupViewSwitchBehavior)popupViewSwitchBehavior;
+
 @end
 
 NS_ASSUME_NONNULL_END
