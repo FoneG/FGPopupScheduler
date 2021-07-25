@@ -39,19 +39,24 @@ iOS弹窗调用器，控制弹窗按照指定的策略进行显示
 
 ```
 FGPopupScheduler *Scheduler = FGPopupSchedulerGetForPSS(FGPopupSchedulerStrategyFIFO);
-BasePopupView *pop1 =  [[BasePopupView alloc] initWithDescrption:@"第一个 pop" scheduler:Scheduler];
-AnimationShowPopupView *pop2 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
+AnimationShowPopupView *pop1 =  [[AnimationShowPopupView alloc] initWithDescrption:@"自定义动画 pop2" scheduler:Scheduler];
+ConditionsPopView *pop2 =  [[ConditionsPopView alloc] initWithDescrption:@"条件弹窗 pop3 Discard" scheduler:Scheduler];
 
-[Scheduler add:pop1];
-[Scheduler add:pop2 strategy:FGPopupViewStrategyKeep Priority:FGPopupStrategyPriorityLow];
-
-
-/// 如果希望提前预存弹窗, 可以使用挂起模式.
-Scheduler.suspended = YES;
+[Scheduler add:pop];
+[Scheduler add:pop2];
 
 ```
 注意该组件使用实例化方式使用，为了避免弹窗调度器提前释放，需要外部对其进行强持有（建议作为调用方的属性或实例变量）。
 
+### 挂起
+
+```
+/**
+ 可以将调度器进行挂起，可以中止队列触发- execute。挂起状态不会影响已经execute的弹窗
+ */
+@property (nonatomic, assign, getter=isSuspended) BOOL suspended;
+```
+如果希望同时添加多个弹窗后再根据指定的策略进行显示，需要先将队列挂起，添加完成后再恢复。
 
 ### 调度策略
 
@@ -68,11 +73,22 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
 
 ### 触发策略
 
-目前仅支持2种触发行为, 用户可以根据它来决定，当弹窗触发显示逻辑时是否要继续等待
+目前支持2种触发行为, 用户可以根据它来决定，当弹窗触发显示逻辑时是否要继续等待
 ```
 typedef NS_ENUM(NSUInteger, FGPopupViewUntriggeredBehavior) {
     FGPopupViewUntriggeredBehaviorDiscard,          //未满足条件时会被直接丢弃
     FGPopupViewUntriggeredBehaviorAwait,          //未满足条件时会继续等待
+};
+```
+
+### 切换策略
+
+目前支持3种切换行为, 用户可以根据它来决定，当该弹窗已经显示时，是否会被后续高优线级的弹窗影响。仅在优先级调度策略时生效：FGPopupSchedulerStrategyPriority
+```
+typedef NS_ENUM(NSUInteger, FGPopupViewSwitchBehavior) {
+    FGPopupViewSwitchBehaviorDiscard,  //当该弹窗已经显示，如果后面来了弹窗优先级更高的弹窗时，显示更高优先级弹窗并且当前弹窗会被抛弃
+    FGPopupViewSwitchBehaviorLatent,   //当该弹窗已经显示，如果后面来了弹窗优先级更高的弹窗时，显示更高优先级弹窗并且当前弹窗重新进入队列, PS：优先级相同时同 FGPopupViewSwitchBehaviorDiscard
+    FGPopupViewSwitchBehaviorAwait,    //当该弹窗已经显示时，不会被后续高优线级的弹窗影响
 };
 ```
 
