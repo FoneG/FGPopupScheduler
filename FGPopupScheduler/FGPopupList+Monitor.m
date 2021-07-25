@@ -28,11 +28,9 @@ static char kFGPopupListPopupMonitorKey;
 - (void)Monitor_dismissPopupView{
     [self Monitor_dismissPopupView];
 
-    FGPopupList *list = objc_getAssociatedObject(self, &kFGPopupListPopupMonitorKey);
-    if (list && [self conformsToProtocol:@protocol(FGPopupView)]) {
-        objc_setAssociatedObject(self, &kFGPopupListPopupMonitorKey, nil, OBJC_ASSOCIATION_ASSIGN);
+    if ([self conformsToProtocol:@protocol(FGPopupView)]) {
         id<FGPopupView> obj = (id<FGPopupView>)self;
-        [list removePopupView:obj];
+        [FGPopupList tryRemovePopupView:obj];
     }
 }
 
@@ -41,15 +39,21 @@ static char kFGPopupListPopupMonitorKey;
         if (block) {
             block();
         }
-        FGPopupList *list = objc_getAssociatedObject(self, &kFGPopupListPopupMonitorKey);
-        if (list && [self conformsToProtocol:@protocol(FGPopupView)]) {
-            objc_setAssociatedObject(self, &kFGPopupListPopupMonitorKey, nil, OBJC_ASSOCIATION_ASSIGN);
+        if ([self conformsToProtocol:@protocol(FGPopupView)]) {
             id<FGPopupView> obj = (id<FGPopupView>)self;
-            [list removePopupView:obj];
+            [FGPopupList tryRemovePopupView:obj];
         }
     };
     
     [self Monitor_dismissPopupViewWithAnimation:Monitor_block];
+}
+
++ (void)tryRemovePopupView:(id<FGPopupView>)obj{
+    FGPopupList *list = objc_getAssociatedObject(obj, &kFGPopupListPopupMonitorKey);
+    if (list) {
+        objc_setAssociatedObject(obj, &kFGPopupListPopupMonitorKey, nil, OBJC_ASSOCIATION_ASSIGN);
+        [list removePopupView:obj];
+    }
 }
 
 @end

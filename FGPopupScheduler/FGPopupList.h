@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, readonly) PopupElement *FirstFirstResponderElement;
 
+@property (nonatomic, assign, readonly) BOOL hasFirstFirstResponder;
+
 /**
  线程安全操作
  */

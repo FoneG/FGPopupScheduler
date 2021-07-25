@@ -103,6 +103,9 @@ using namespace std;
     [self lock];
     id<FGPopupView> data = self.FirstFirstResponderElement.data;
     if (!data) {
+        self->_FirstFirstResponderElement = nil;
+        self->_hasFirstFirstResponder = NO;
+        self->_clearFlag = NO;
         [self unLock];
         return;
     }
@@ -114,6 +117,8 @@ using namespace std;
         if ([data respondsToSelector:@selector(dismissPopupView)]) {
             [data dismissPopupView];
             [self lock];
+            self->_FirstFirstResponderElement = nil;
+            self->_hasFirstFirstResponder = NO;
             self->_clearFlag = NO;
             [self unLock];
         }
@@ -122,6 +127,8 @@ using namespace std;
             [data dismissPopupViewWithAnimation:^{
                 SS(sSelf);
                 [sSelf lock];
+                self->_FirstFirstResponderElement = nil;
+                self->_hasFirstFirstResponder = NO;
                 sSelf->_clearFlag = NO;
                 [sSelf unLock];
             }];
