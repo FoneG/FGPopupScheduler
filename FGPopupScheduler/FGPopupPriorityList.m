@@ -7,21 +7,26 @@
 
 #import "FGPopupPriorityList.h"
 #import "FGPopupList+Internal.h"
+#import <objc/runtime.h>
 
 @implementation FGPopupPriorityList
 
 - (void)addPopupView:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)Priority{
+    id<FGPopupView> firstResponderPopuper = self.FirstFirstResponderElement.data;
+    FGPopupStrategyPriority firstResponderPriority = self.FirstFirstResponderElement.Priority;
     
-    BOOL jump = [self.FirstFirstResponderElement.data respondsToSelector:@selector(popupViewSwitchBehavior)] && self.FirstFirstResponderElement.data.popupViewSwitchBehavior != FGPopupViewSwitchBehaviorAwait;
-    BOOL highPriority = self.FirstFirstResponderElement.Priority < Priority || (self.FirstFirstResponderElement.Priority == Priority && self.PPAS == FGPopupPriorityAddStrategyLIFO);
+    BOOL jump = [firstResponderPopuper respondsToSelector:@selector(popupViewSwitchBehavior)] && firstResponderPopuper.popupViewSwitchBehavior != FGPopupViewSwitchBehaviorAwait;
+    BOOL highPriority = firstResponderPriority < Priority || (firstResponderPriority == Priority && self.PPAS == FGPopupPriorityAddStrategyLIFO);
     
+    BOOL reinsert = NO;
     if (jump && highPriority) {
-        switch (self.FirstFirstResponderElement.data.popupViewSwitchBehavior) {
+        switch (firstResponderPopuper.popupViewSwitchBehavior) {
             case FGPopupViewSwitchBehaviorAwait:
                 ///
                 break;
             case FGPopupViewSwitchBehaviorLatent:
-                ///
+                reinsert = firstResponderPriority < Priority;
+                [self discardPopupElemnt:self.FirstFirstResponderElement];
                 break;
             case FGPopupViewSwitchBehaviorDiscard:
                 [self discardPopupElemnt:self.FirstFirstResponderElement];
@@ -44,6 +49,10 @@
     }];
     [self _insert:[PopupElement elementWith:view Priority:Priority] index:index];
     [self unLock];
+    
+    if (reinsert) {
+        [self addPopupView:firstResponderPopuper Priority:firstResponderPriority];
+    }
 }
 
 - (void)discardPopupElemnt:(PopupElement *)element{

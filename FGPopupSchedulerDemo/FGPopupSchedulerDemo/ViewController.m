@@ -77,7 +77,8 @@ static BOOL suspendState = NO;
     
     PopupViewHandler *handler = [[PopupViewHandler alloc] initWithDescrption:@"弹窗组手" scheduler:Scheduler];
 
-    pop1.switchBehavior = FGPopupViewSwitchBehaviorDiscard;
+//    pop1.switchBehavior = FGPopupViewSwitchBehaviorDiscard;
+    pop1.switchBehavior = FGPopupViewSwitchBehaviorLatent;
     [Scheduler add:pop1 Priority:FGPopupStrategyPriorityVeryHigh];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [Scheduler add:pop2];
@@ -134,7 +135,7 @@ static BOOL suspendState = NO;
 - (IBAction)jumpHighPriorityPopupView:(id)sender {
     
     BasePopupView *pop =  [[BasePopupView alloc] initWithDescrption:@"VeryHigh PopupView" scheduler:self.Scheduler];
-    [self.Scheduler add:pop Priority:FGPopupStrategyPriorityVeryHigh];
+    [self.Scheduler add:pop Priority:FGPopupStrategyPriorityVeryHigh+1];
 }
 
 - (void)clearScheduler{
