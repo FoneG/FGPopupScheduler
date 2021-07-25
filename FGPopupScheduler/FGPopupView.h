@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
-/** 0.2.0 新增*/
+/** 0.4.0 新增*/
 
 /**
  FGPopupSchedulerStrategyQueue 会根据 - popupViewUntriggeredBehavior：来决定触发时弹窗的显示行为，默认为 FGPopupViewUntriggeredBehaviorAwait
