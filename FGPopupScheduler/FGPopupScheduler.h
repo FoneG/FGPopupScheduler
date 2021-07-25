@@ -32,13 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)add:(id<FGPopupView>)view;
 
 /**
- 向队列插入一个弹窗，FGPopupScheduler会根据设置的策略状态来控制在队列中插入的位置, 支持线程安全
+ 向队列插入一个弹窗，FGPopupScheduler会根据设置的策略状态来控制在队列中插入的位置, 支持线程安全  (FGPopupViewStrategy逻辑已经被删除，替换枚举类型： FGPopupViewSwitchBehavior )
  
  @param view 弹窗实例
- @param pvs 当插入时存在显示的弹窗会根据FGPopupViewStrategy来判断是否保留弹窗
  @param psp 当选择优先级调度策略时，会根据 FGPopupStrategyPriority来判断弹窗插入的位置
  */
-- (void)add:(id<FGPopupView>)view strategy:(FGPopupViewStrategy)pvs Priority:(FGPopupStrategyPriority)psp;
+- (void)add:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)psp;
 
 
 /**

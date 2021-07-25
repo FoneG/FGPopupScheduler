@@ -40,7 +40,7 @@
         label.numberOfLines = 0;
         [self addSubview:label];
         
-        _behavior = FGPopupViewSwitchBehaviorAwait;
+        _switchBehavior = FGPopupViewSwitchBehaviorAwait;
         _scheduler = scheduler;
     }
     return self;
@@ -66,7 +66,7 @@
 }
 
 - (FGPopupViewSwitchBehavior)popupViewSwitchBehavior{
-    return self.behavior;
+    return self.switchBehavior;
 }
 
 @end

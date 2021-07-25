@@ -15,12 +15,6 @@ typedef NS_ENUM(NSUInteger, FGPopupSchedulerStrategy) {
     FGPopupSchedulerStrategyPriority = 1 << 2        //优先级调度
 };
 
-//当前显示弹窗已经存在时，会根据FGPopupViewStrategy策略判断是否如何处理弹窗
-typedef NS_ENUM(NSUInteger, FGPopupViewStrategy) {
-    FGPopupViewStrategyKeep,          //保留
-    FGPopupViewStrategyAbandon,       //抛弃
-};
-
 typedef NS_ENUM(NSUInteger, FGPopupViewSwitchBehavior) {
     FGPopupViewSwitchBehaviorDiscard,  //当该弹窗已经显示，如果后面来了弹窗优先级更高的弹窗时，显示更高优先级弹窗并且当前弹窗会被抛弃
     FGPopupViewSwitchBehaviorLatent,   //当该弹窗已经显示，如果后面来了弹窗优先级更高的弹窗时，显示更高优先级弹窗并且当前弹窗重新进入队列
