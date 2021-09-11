@@ -12,6 +12,22 @@
 @implementation FGPopupPriorityList
 
 - (void)addPopupView:(id<FGPopupView>)view Priority:(FGPopupStrategyPriority)Priority{
+   
+    [super addPopupView:view Priority:Priority];
+    __block int index = 0;
+    /// create FIFO
+    [self _enumerateObjectsUsingBlock:^(PopupElement * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.Priority > Priority) {
+            index++;
+        }else if(obj.Priority == Priority && self.PPAS == FGPopupPriorityAddStrategyFIFO){
+            index++;
+        }else{
+            *stop = YES;
+        }
+    }];
+    [self _insert:[PopupElement elementWith:view Priority:Priority] index:index];
+    
+    
     id<FGPopupView> firstResponderPopuper = self.FirstFirstResponderElement.data;
     FGPopupStrategyPriority firstResponderPriority = self.FirstFirstResponderElement.Priority;
     
@@ -33,21 +49,6 @@
                 break;
         }
     }
-    
-    [super addPopupView:view Priority:Priority];
-    __block int index = 0;
-    /// create FIFO
-    [self _enumerateObjectsUsingBlock:^(PopupElement * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.Priority > Priority) {
-            index++;
-        }else if(obj.Priority == Priority && self.PPAS == FGPopupPriorityAddStrategyFIFO){
-            index++;
-        }else{
-            *stop = YES;
-        }
-    }];
-    [self _insert:[PopupElement elementWith:view Priority:Priority] index:index];
-    
     if (reinsert) {
         [self addPopupView:firstResponderPopuper Priority:firstResponderPriority];
     }
