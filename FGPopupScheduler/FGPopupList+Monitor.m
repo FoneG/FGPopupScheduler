@@ -16,13 +16,17 @@ static char kFGPopupListPopupMonitorKey;
 - (void)monitorRemoveEventWith:(id<FGPopupView>)popup{
     
     objc_setAssociatedObject(popup, &kFGPopupListPopupMonitorKey, self, OBJC_ASSOCIATION_ASSIGN);
-    
+
+    BOOL exist = NO;
     if ([popup respondsToSelector:@selector(dismissPopupView)]) {
+        exist = YES;
         [[popup class] swizzleOrAddInstanceMethod:@selector(dismissPopupView) withNewSel:@selector(Monitor_dismissPopupView) withNewSelClass:self.class];
     }
     if ([popup respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
+        exist = YES;
         [[popup class] swizzleOrAddInstanceMethod:@selector(dismissPopupViewWithAnimation:) withNewSel:@selector(Monitor_dismissPopupViewWithAnimation:) withNewSelClass:self.class];
     }
+    NSAssert(exist, @"You must have to implementation -dismissPopupView or -dismissPopupViewWithAnimation:");
 }
 
 - (void)Monitor_dismissPopupView{

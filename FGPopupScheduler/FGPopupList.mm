@@ -52,6 +52,8 @@ using namespace std;
     }
     else if([view respondsToSelector:@selector(showPopupView)]){
         [view showPopupView];
+    }else{
+        NSAssert(NO, @"You must have to implementation -showPopupViewWithAnimation: or -showPopupView");
     }
 }
 
