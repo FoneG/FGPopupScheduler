@@ -53,6 +53,7 @@ static char kFGPopupListPopupMonitorKey;
     if (list) {
         objc_setAssociatedObject(obj, &kFGPopupListPopupMonitorKey, nil, OBJC_ASSOCIATION_ASSIGN);
         [list removePopupView:obj];
+        [list execute];
     }
 }
 

@@ -15,42 +15,14 @@ using namespace std;
 @interface FGPopupList ()
 {
     list<PopupElement*> _list;
-    dispatch_semaphore_t _semaphore_t;
-    BOOL _clearFlag;   ///清除时同样被认为不能进行注册新响应者
 }
 @property (nonatomic, strong) PopupElement *FirstFirstResponderElement;
-@property (nonatomic, assign) BOOL hasFirstFirstResponder;
 @end
 
 @implementation FGPopupList
 
-- (void)lock{
-    intptr_t result = dispatch_semaphore_wait(_semaphore_t, DISPATCH_TIME_FOREVER);
-    NSLog(@"-------------- %@", [NSThread currentThread]);
-    if (result!=0) {
-        NSLog(@"lock failed: %ld", result);
-    }
-}
-
-- (void)unLock{
-    dispatch_semaphore_signal(_semaphore_t);
-    NSLog(@"+++++++++++++++++ %@", [NSThread currentThread]);
-}
-
 - (BOOL)canRegisterFirstFirstPopupViewResponder{
-    [self lock];
-    BOOL canRegisterFirstFirstPopupViewResponder = !self.hasFirstFirstResponder && !_clearFlag;
-    [self unLock];
-    return canRegisterFirstFirstPopupViewResponder;
-}
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _semaphore_t = dispatch_semaphore_create(1);
-    }
-    return self;
+    return self.FirstFirstResponderElement == nil ;
 }
 
 #pragma mark - FGPopupSchedulerStrategyQueue
@@ -61,38 +33,26 @@ using namespace std;
 
 
 - (void)removePopupView:(id<FGPopupView>)view{
-    [self lock];
     [self _rm_data:view];
     if (_FirstFirstResponderElement.data == view) {
-        _hasFirstFirstResponder = NO;
         _FirstFirstResponderElement = nil;
     }
-    [self unLock];
 }
 
 - (void)execute{
-    [self lock];
-    self.hasFirstFirstResponder = YES;
-    [self unLock];
-    /// 这里提前切换到主线程 是为了保证当前消耗的信号能够在 -execute 操作执行结束前能够发送一个新信号
-    dispatch_sync_main_safe(^(){
-        PopupElement *elemt = [self _hitTestFirstPopupResponder];
-        id<FGPopupView> view = elemt.data;
-        if (!view) {
-            [self lock];
-            self->_hasFirstFirstResponder = NO;
-            [self unLock];
-            return;
-        }
-        self.FirstFirstResponderElement = elemt;
-        
-        if ([view respondsToSelector:@selector(showPopupViewWithAnimation:)]) {
-            [view showPopupViewWithAnimation:^{}];
-        }
-        else if([view respondsToSelector:@selector(showPopupView)]){
-            [view showPopupView];
-        }
-    });
+    PopupElement *elemt = [self _hitTestFirstPopupResponder];
+    id<FGPopupView> view = elemt.data;
+    if (!view) {
+        return;
+    }
+    self.FirstFirstResponderElement = elemt;
+    
+    if ([view respondsToSelector:@selector(showPopupViewWithAnimation:)]) {
+        [view showPopupViewWithAnimation:^{}];
+    }
+    else if([view respondsToSelector:@selector(showPopupView)]){
+        [view showPopupView];
+    }
 }
 
 - (BOOL)isEmpty{
@@ -100,40 +60,22 @@ using namespace std;
 }
 
 - (void)clear{
-    [self lock];
-    id<FGPopupView> data = self.FirstFirstResponderElement.data;
-    if (!data) {
-        self->_FirstFirstResponderElement = nil;
-        self->_hasFirstFirstResponder = NO;
-        self->_clearFlag = NO;
-        [self unLock];
-        return;
-    }
-    _clearFlag = YES;
-    _list.clear();
-    [self unLock];
     
-    dispatch_async_main_safe(^(){
-        if ([data respondsToSelector:@selector(dismissPopupView)]) {
-            [data dismissPopupView];
-            [self lock];
-            self->_FirstFirstResponderElement = nil;
-            self->_hasFirstFirstResponder = NO;
-            self->_clearFlag = NO;
-            [self unLock];
-        }
-        else if ([data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
-            WS(wSelf);
-            [data dismissPopupViewWithAnimation:^{
-                SS(sSelf);
-                [sSelf lock];
-                self->_FirstFirstResponderElement = nil;
-                self->_hasFirstFirstResponder = NO;
-                sSelf->_clearFlag = NO;
-                [sSelf unLock];
-            }];
-        }
-    });
+    _list.clear();
+    
+    id<FGPopupView> data = self.FirstFirstResponderElement.data;
+    
+    if ([data respondsToSelector:@selector(dismissPopupView)]) {
+        [data dismissPopupView];
+        self.FirstFirstResponderElement = nil;
+    }
+    else if ([data respondsToSelector:@selector(dismissPopupViewWithAnimation:)]) {
+        WS(wSelf);
+        [data dismissPopupViewWithAnimation:^{
+            SS(sSelf);
+            sSelf.FirstFirstResponderElement = nil;
+        }];
+    }
 }
 
 /*
@@ -188,7 +130,6 @@ using namespace std;
 
 - (void)_rm:(PopupElement *)elemt{
     [self _rm_data:elemt.data];
-    _hasFirstFirstResponder = NO;
 }
 
 - (void)_enumerateObjectsUsingBlock:(void (NS_NOESCAPE ^)(PopupElement *obj, NSUInteger idx, BOOL *stop))block{

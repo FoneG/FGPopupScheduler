@@ -34,7 +34,6 @@
         }
     }
     
-    [self lock];
     [super addPopupView:view Priority:Priority];
     __block int index = 0;
     /// create FIFO
@@ -48,7 +47,6 @@
         }
     }];
     [self _insert:[PopupElement elementWith:view Priority:Priority] index:index];
-    [self unLock];
     
     if (reinsert) {
         [self addPopupView:firstResponderPopuper Priority:firstResponderPriority];

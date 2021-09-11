@@ -14,11 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FGPopupList : NSObject <FGPopupSchedulerStrategyQueue>
 
 @property (nonatomic, strong, readonly) PopupElement *FirstFirstResponderElement;
-/**
- 线程安全操作
- */
-- (void)lock;
-- (void)unLock;
 
 @end
 

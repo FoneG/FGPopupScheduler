@@ -71,41 +71,61 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
     }
 }
 
-- (void)add:(id<FGPopupView>)view{
-    [self add:view Priority:FGPopupStrategyPriorityNormal];
-}
-
-- (void)add:(id<FGPopupView>)view  Priority:(FGPopupStrategyPriority)Priority{
-    [_list addPopupView:view Priority:Priority];
-    [self registerFirstPopupViewResponder];
-}
-
-- (void)remove:(id<FGPopupView>)view{
-    [_list removePopupView:view];
-}
-
-- (void)removeAllPopupViews{
-    [_list clear];
-}
-
-- (BOOL)canRegisterFirstPopupViewResponder{
-    return [_list canRegisterFirstFirstPopupViewResponder];;
-}
-
-- (void)registerFirstPopupViewResponder{
-    if (!self.suspended && self.canRegisterFirstPopupViewResponder) {
-        [_list execute];
-    }
-}
-
-- (BOOL)isEmpty{
-    return [_list isEmpty];
-}
-
 - (void)setSuspended:(BOOL)suspended{
     _suspended = suspended;
     if (!suspended) [self registerFirstPopupViewResponder];
 }
+
+- (void)add:(id<FGPopupView>)view{
+    [self add:view Priority:FGPopupStrategyPriorityNormal];
+}
+
+
+#pragma mark - List Operation method
+
+- (void)add:(id<FGPopupView>)view  Priority:(FGPopupStrategyPriority)Priority{
+    dispatch_async_main_safe(^(){
+        [self->_list addPopupView:view Priority:Priority];
+        [self registerFirstPopupViewResponder];
+    });
+}
+
+- (void)remove:(id<FGPopupView>)view{
+    dispatch_async_main_safe(^(){
+        [self->_list removePopupView:view];
+    });
+}
+
+- (void)removeAllPopupViews{
+    dispatch_async_main_safe(^(){
+        [self->_list clear];
+    });
+}
+
+- (BOOL)canRegisterFirstPopupViewResponder{
+    __block BOOL canRegister = NO;
+    dispatch_sync_main_safe(^(){
+        canRegister = [self->_list canRegisterFirstFirstPopupViewResponder];
+    });
+    return canRegister;
+}
+
+- (void)registerFirstPopupViewResponder{
+    if (!self.suspended && self.canRegisterFirstPopupViewResponder) {
+        dispatch_async_main_safe(^(){
+            [self->_list execute];
+        });
+    }
+}
+
+- (BOOL)isEmpty{
+    __block BOOL empty = NO;
+    dispatch_sync_main_safe(^(){
+        empty = [self->_list isEmpty];
+    });
+    return empty;
+}
+
 @end
 
 FGPopupScheduler * FGPopupSchedulerGetForPSS(FGPopupSchedulerStrategy pss){
