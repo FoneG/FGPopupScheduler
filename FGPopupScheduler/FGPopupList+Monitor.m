@@ -57,7 +57,8 @@ static char kFGPopupListPopupMonitorKey;
     if (list) {
         objc_setAssociatedObject(obj, &kFGPopupListPopupMonitorKey, nil, OBJC_ASSOCIATION_ASSIGN);
         [list removePopupView:obj];
-        [list execute];
+        /// 唤醒主线程做hitTest
+        [list performSelector:@selector(hash) withObject:nil afterDelay:0];
     }
 }
 

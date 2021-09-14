@@ -72,8 +72,10 @@ static void FGRunLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopAc
 }
 
 - (void)setSuspended:(BOOL)suspended{
-    _suspended = suspended;
-    if (!suspended) [self registerFirstPopupViewResponder];
+    dispatch_async_main_safe(^(){
+        self->_suspended = suspended;
+        if (!suspended) [self registerFirstPopupViewResponder];
+    });
 }
 
 - (void)add:(id<FGPopupView>)view{
