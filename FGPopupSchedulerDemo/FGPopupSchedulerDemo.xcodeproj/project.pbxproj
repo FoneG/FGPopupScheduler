@@ -29,7 +29,21 @@
 		B491BCDF2683592900281EDC /* BlueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BCDE2683592900281EDC /* BlueViewController.m */; };
 		B491BD702684502F00281EDC /* Uitl.m in Sources */ = {isa = PBXBuildFile; fileRef = B491BD6F2684502F00281EDC /* Uitl.m */; };
 		B491BD742684586C00281EDC /* FGPopupList.mm in Sources */ = {isa = PBXBuildFile; fileRef = B491BD732684586C00281EDC /* FGPopupList.mm */; };
+		B4AE525927367013002F3E72 /* NSObject+FGPopupViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AE525827367013002F3E72 /* NSObject+FGPopupViewHandler.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B472549F272A7D120073C9E9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B43D2D5C26AAC7DB0012BF90 /* FGPopupList+Monitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FGPopupList+Monitor.h"; sourceTree = "<group>"; };
@@ -78,6 +92,8 @@
 		B491BD722684586B00281EDC /* FGPopupList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FGPopupList.h; sourceTree = "<group>"; };
 		B491BD732684586C00281EDC /* FGPopupList.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FGPopupList.mm; sourceTree = "<group>"; };
 		B491BE0726847CE900281EDC /* FGPopupList+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FGPopupList+Internal.h"; sourceTree = "<group>"; };
+		B4AE525727367013002F3E72 /* NSObject+FGPopupViewHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+FGPopupViewHandler.h"; sourceTree = "<group>"; };
+		B4AE525827367013002F3E72 /* NSObject+FGPopupViewHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+FGPopupViewHandler.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +167,8 @@
 				B48AAB4E2682E19C0081381E /* FGPopupView.h */,
 				B43D2D6026AAC9AC0012BF90 /* NSObject+SwizzleMethod.h */,
 				B43D2D6126AAC9AC0012BF90 /* NSObject+SwizzleMethod.m */,
+				B4AE525727367013002F3E72 /* NSObject+FGPopupViewHandler.h */,
+				B4AE525827367013002F3E72 /* NSObject+FGPopupViewHandler.m */,
 			);
 			name = FGPopupScheduler;
 			path = ../../FGPopupScheduler;
@@ -194,6 +212,7 @@
 				B48AAB292682E12A0081381E /* Sources */,
 				B48AAB2A2682E12A0081381E /* Frameworks */,
 				B48AAB2B2682E12A0081381E /* Resources */,
+				B472549F272A7D120073C9E9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -266,6 +285,7 @@
 				B491BCDF2683592900281EDC /* BlueViewController.m in Sources */,
 				B48AAB5426830C030081381E /* FGPopupQueue.m in Sources */,
 				B491BCCB2683557C00281EDC /* BasePopupView.m in Sources */,
+				B4AE525927367013002F3E72 /* NSObject+FGPopupViewHandler.m in Sources */,
 				B43D2D5E26AAC7DB0012BF90 /* FGPopupList+Monitor.m in Sources */,
 				B48AAB432682E12C0081381E /* main.m in Sources */,
 				B491BD742684586C00281EDC /* FGPopupList.mm in Sources */,
