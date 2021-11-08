@@ -16,7 +16,7 @@
 
 #import "FGPopupScheduler.h"
 #import "FGPopupList.h"
-#import "NSObject+FGPopupViewHandler.h"
+#import "FGPopupViewPlaceHolder.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *insertHightPopupButton;
@@ -80,14 +80,16 @@ static BOOL suspendState = NO;
     
     
     UIAlertController *vc = [UIAlertController alertControllerWithTitle:@"系统弹窗" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    FGPopupViewPlaceHolder *AlertPlaceHolder = [FGPopupViewPlaceHolder generatePlaceHolderWith:vc];
+    __weak FGPopupViewPlaceHolder* weakHolder = AlertPlaceHolder;
     [vc addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [vc clearPopupSchedulerWhenPopViewDidDismiss:Scheduler];
+        [Scheduler remove:weakHolder];
     }]];
-    __weak ViewController *weakSelf = self;
-    vc.FGPopupViewHandler.showPopupViewCallBlock = ^(NSObject * _Nonnull weakObj) {
-        [weakSelf presentViewController:(UIAlertController *)weakObj animated:YES completion:nil];
+    
+    AlertPlaceHolder.showPopupViewCallBlock = ^(NSObject *__weak  _Nonnull weakObj) {
+        [self presentViewController:(UIAlertController *)weakObj animated:YES completion:nil];
     };
-    vc.FGPopupViewHandler.removePopupViewCallBlock = ^(NSObject * _Nonnull weakObj) {
+    AlertPlaceHolder.removePopupViewCallBlock = ^(NSObject *__weak  _Nonnull weakObj) {
         [(UIAlertController *)weakObj dismissViewControllerAnimated:nil completion:nil];
     };
     
@@ -97,7 +99,7 @@ static BOOL suspendState = NO;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         [Scheduler add:pop2];
         [Scheduler add:pop3];
-        [Scheduler add:vc.FGPopupViewHandler];
+        [Scheduler add:AlertPlaceHolder];
         [Scheduler add:pop4 Priority:FGPopupStrategyPriorityHigh];
         [Scheduler add:pop5 Priority:FGPopupStrategyPriorityLow];
         [Scheduler add:pop6 Priority:FGPopupStrategyPriorityVeryLow];
